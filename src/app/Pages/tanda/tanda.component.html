@@ -1,0 +1,54 @@
+<h1 id="tableLabel">Tandas</h1>
+
+<p>Listados de Tandas Registrados:{{Tandas.length}}</p>
+<div class="input-group">
+  <input class="form-control" type="text" 
+         placeholder="Search for..." 
+         aria-label="Search for..." 
+         aria-describedby="btnNavbarSearch" 
+         style="margin-bottom:5px; margin-left:-14px"
+         (ngModel)="term" />
+  
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a (click)="abrilformulario() " class="nav-link active">  Agregar</a>
+  </li>
+</ul>
+
+
+<p *ngIf="!Tandas"><em>Cargando...</em></p>
+
+
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="Tandas">
+  <thead>
+    <tr>
+      <th>Descripcion</th>
+      <th>Editar</th>
+      <!-- <th>Eliminar</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tanda of Tandas | filter: term ">
+      <td>{{ tanda.descripcion }}</td>
+
+      <td>
+        <button class="btn btn-primary" (click)="abrirmodaledit(tanda);">Editar</button>
+      <!-- </td>
+      <td><button class="btn btn-danger" (click)=" delete(persona);">Eliminar</button></td> -->
+
+    </tr>
+  </tbody>
+</table>
+<!-- <pagination-controls [maxSize]="maxSize"
+                     [directionLinks]="directionLinks"
+                     [autoHide]="autoHide"
+                     [responsive]="responsive"
+                     [previousLabel]="labels.previousLabel"
+                     [nextLabel]="labels.nextLabel"
+                     [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                     [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                     [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                     (pageChange)="onPageChange($event)"></pagination-controls>  -->

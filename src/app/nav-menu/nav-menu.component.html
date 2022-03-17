@@ -1,0 +1,40 @@
+<mat-toolbar>
+    
+    <button mat-icon-button *ngIf="sidenav.mode === 'over' && mostrarmenu"
+            (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened"> menu</mat-icon>
+      <mat-icon *ngIf="sidenav.opened"> close</mat-icon>
+    </button>
+    Dispensario Medico San Agustin 
+  </mat-toolbar>
+  <mat-sidenav-container style="height: 90%;">
+  
+    <mat-sidenav #sidenav="matSidenav" >
+      <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/user/erondu/200x200" />
+  
+      <h4 class="name">{{userdts.persona}}</h4>
+      <p class="designation">{{userdts.rol}}</p>
+  
+      <mat-divider></mat-divider>
+      <ng-container      *ngFor="let menu of navMenus">
+        <button mat-button class="menu-button" [routerLink]="menu.url" (click)="cerrarmenu()">
+          <mat-icon>{{menu.icon}}</mat-icon>
+          <span>{{menu.text}}</span>
+        </button>
+     </ng-container>   
+     <mat-divider></mat-divider>
+      <button mat-button class="menu-button" (click)="logout()">
+        <span>Logout</span>
+      </button>    
+    </mat-sidenav>
+    <mat-divider></mat-divider>
+    
+    <mat-sidenav-content >   
+       <div class="mat-elevation-z4" style="height: 96%; margin-top: 16px; margin-left:30px;width:95%;">
+        <div  style="margin-left:30px;width:95%;">
+         <router-outlet ></router-outlet> 
+        </div>
+      </div> 
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

@@ -1,0 +1,51 @@
+<div class="input-group">
+    <input class="form-control" type="text" 
+           placeholder="Search for..." 
+           aria-label="Search for..." 
+           aria-describedby="btnNavbarSearch" 
+           style="margin-bottom:5px; margin-left:-14px"
+           [(ngModel)]="term" />
+    
+  </div>
+  
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a (click)="abrirmodal() " class="nav-link active">  Agregar</a>
+    </li>
+  </ul>
+  
+  <p *ngIf="!doctores"><em>Cargando...</em></p>
+  
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="doctores">
+    <thead>
+      <tr>
+        <th>Nombres</th>
+        <th>Apellidos(C)</th>
+        <th>Especialidad</th>
+        <th>Opcion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doctor of doctores | filter: term  ">
+        <td>{{ doctor.persona.nombres }}</td>
+        <td>{{ doctor.persona.apellidos }}</td>
+        <td>{{ doctor.especialidad.descripcion }}</td>
+        <td>
+            <button mat-button [mat-dialog-close]="doctor" >Selecionar</button>
+        </td>
+        
+  
+      </tr>
+    </tbody>
+  </table>
+  <!-- <pagination-controls [maxSize]="maxSize"
+  [directionLinks]="directionLinks"
+  [autoHide]="autoHide"
+  [responsive]="responsive"
+  [previousLabel]="labels.previousLabel"
+  [nextLabel]="labels.nextLabel"
+  [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+  [screenReaderPageLabel]="labels.screenReaderPageLabel"
+  [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+  (pageChange)="onPageChange($event)"></pagination-controls> -->
+  

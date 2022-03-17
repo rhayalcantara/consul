@@ -1,0 +1,51 @@
+
+
+<div class="input-group">
+    <input class="form-control" type="text" 
+           placeholder="Search for..." 
+           aria-label="Search for..." 
+           aria-describedby="btnNavbarSearch" 
+           style="margin-bottom:5px; margin-left:-14px"
+           [(ngModel)]="term" />
+    
+  </div>
+  
+  
+  <p *ngIf="!Documentos"><em>No Hay Archivos...</em></p>
+  
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="Documentos">
+    <thead>
+      <tr>
+        <th>Ruta</th>
+        <th>Fechaingreso</th>
+        <th>Opcion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doc of Documentos  ">
+        <td>{{ doc.ruta }}</td>
+        <td>{{ doc.fechaingreso}}</td>
+        <td>
+            <button class="btn btn-primary" (click)="abrirmodaledit(doc);">Ver</button>
+        </td>
+         <td><button class="btn btn-danger" (click)=" delete(doc);">Eliminar</button></td>
+            
+        
+      </tr>
+    </tbody>
+  </table>
+  
+ 
+
+ <!-- <pagination-controls [maxSize]="maxSize"
+  [directionLinks]="directionLinks"
+  [autoHide]="autoHide"
+  [responsive]="responsive"
+  [previousLabel]="labels.previousLabel"
+  [nextLabel]="labels.nextLabel"
+  [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+  [screenReaderPageLabel]="labels.screenReaderPageLabel"
+  [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+  (pageChange)="onPageChange($event)"></pagination-controls> 
+   -->
+

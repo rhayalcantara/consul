@@ -1,0 +1,50 @@
+<h1 id="tableLabel">Turnos </h1>
+
+<div class="input-group" >
+    <input class="form-control" type="text" 
+           placeholder="Search for..." 
+           aria-label="Search for..." 
+           aria-describedby="btnNavbarSearch" 
+           style="margin-bottom:5px; margin-left:-14px"
+           (change)="buscar($event)" />
+    
+  </div>
+  
+
+  
+  <p *ngIf="!lturnos"><em>Cargando...</em></p>
+  
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="lturnos">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Doctor</th>
+        <th>Tanda</th>
+        <th>Numero</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lturno of lturnos">
+        <td>{{lturno.fecha }}</td>
+        <td>{{lturno.doctor}}</td>
+        <td>{{lturno.tanda}}</td> 
+        <td>{{lturno.numero}}</td> 
+         
+        <td>
+            <button class="btn btn-primary" (click)="crearturno(lturno);">crear</button>
+        </td>
+        <td><button class="btn btn-info" (click)=" listar(lturno);">Listar</button></td>
+      </tr>
+    </tbody>
+  </table>
+ <!-- <pagination-controls [maxSize]="maxSize"
+                      [directionLinks]="directionLinks"
+                      [autoHide]="autoHide"
+                      [responsive]="responsive"
+                      [previousLabel]="labels.previousLabel"
+                      [nextLabel]="labels.nextLabel"
+                      [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                      [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                      [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                      (pageChange)="onPageChange($event)"></pagination-controls> -->

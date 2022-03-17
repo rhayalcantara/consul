@@ -1,0 +1,38 @@
+
+  
+
+  
+  <p *ngIf="!agendaconsultoriosdetalle"><em>Cargando...</em></p>
+  
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="agendaconsultoriosdetalle">
+    <thead>
+      <tr>
+        <th>Dia Semana</th>
+        <th>Tanda</th>
+        <th>Valor</th>
+        <th>Cant.Personas</th>
+        <th>Opcion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let acd of agendaconsultoriosdetalle; let i = index ">
+        <td>{{ dias[acd.diasemana]}}</td>
+        <td *ngIf="acd.tanda_id>0">           
+            {{ tandas[acd.tanda_id-1].descripcion}}
+         </td>
+         <td *ngIf="acd.tanda_id<=0">           
+         <label> Selecione una tanda </label> 
+        </td>
+        <td>
+            {{acd.valor}}
+        </td>
+        <td> {{acd.cnt_max}}</td>
+        <td> 
+            <button class="btn btn-primary" (click)="abrirmodaledit(acd);">Editar</button>
+          </td>
+         <!--<td><button class="btn btn-danger" (click)=" delete(consultorio);">Eliminar</button></td>-->
+      </tr>
+    </tbody>
+  </table>
+
+  

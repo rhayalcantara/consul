@@ -1,0 +1,70 @@
+<h1 id="tableLabel">Personas</h1>
+
+<p>Listados de Personas Registradas :{{ personas.length }} </p> 
+<div class="input-group">
+  <input class="form-control" type="text" 
+         placeholder="Search for..." 
+         aria-label="Search for..." 
+         aria-describedby="btnNavbarSearch" 
+         style="margin-bottom:5px; margin-left:-14px"
+         (ngModel)="term" />
+  
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a [routerLink]="" (click)="abrirmodal(content) " class="nav-link active">  Agregar</a>
+  </li>
+</ul>
+
+<p *ngIf="!personas"><em>Cargando...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="personas">
+  <thead>
+    <tr>
+      <th>Nombres</th>
+      <th>Apellidos(C)</th>
+      <th>numero_identificacion</th>
+      <th>tipo_identificacion</th>
+      <th>Editar</th>
+      <!-- <th>Eliminar</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let persona of personas | filter: term ">
+      <td>{{ persona.nombres }}</td>
+      <td>{{ persona.apellidos }}</td>
+      <td>{{ persona.numero_identificacion }}</td>
+      <td>{{ persona.tipo_identificacion }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="abrirmodaledit(content,persona);">Editar</button>
+      </td>
+      <!-- <td><button class="btn btn-danger" (click)=" delete(persona);">Eliminar</button></td> -->
+
+    </tr>
+  </tbody>
+</table>
+<!-- <pagination-controls [maxSize]="maxSize"
+                                   [directionLinks]="directionLinks"
+                                   [autoHide]="autoHide"
+                                   [responsive]="responsive"
+                                   [previousLabel]="labels.previousLabel"
+                                   [nextLabel]="labels.nextLabel"
+                                   [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                                   [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                                   [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                                   (pageChange)="onPageChange($event)"></pagination-controls> -->
+
+<ng-template #content let-modal >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"><i class="fa fa-fw fa-cogs"></i>&nbsp;Mantenimiento Persona</h4>
+  </div>
+  <div class="modal-body">
+    
+    <app-formulariopersona [formGroup]="formGroup" (objChange)="botonesopciones($event)"></app-formulariopersona>
+  </div>
+  <div class="modal-footer">
+    
+  </div>
+
+</ng-template>

@@ -1,0 +1,17 @@
+<table class='styled-table' aria-labelledby="tableLabel"  *ngIf="lpturnos" >
+    <thead>
+      <tr>
+        <th>Turno #</th>
+        <th>Doctor</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let lpturn of lpturnos ">
+            <td>{{lpturn.numero}}</td> 
+            <td>{{lpturn.doctor}}</td>
+            <td>{{lpturn.statusdescripcion}}</td>             
+          </tr>
+    </tbody>
+  </table>
+  <p *ngIf="lpturnos.length==0"><em>Cargando... {{lpturnos.length}}</em></p>

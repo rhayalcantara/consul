@@ -1,0 +1,32 @@
+<h2>Configurar Consultorio Tanda del {{dias[agendaConsultoriodetalle.diasemana]}}</h2>
+<div style="background-color: rgb(116, 199, 224);">
+  <form novalidate (ngSubmit)=" grabar();" [formGroup]="formGroup">
+   
+    <div  class="form-row">
+    
+      <label for="tandaid">Tanda </label>
+      <select class="form-control" formControlName="tanda_id" id="tanda_id"  >
+          <option value=0>Selecione una</option>
+          <option  *ngFor="let tanda of tandas" [value]=tanda.id >{{tanda.descripcion}}</option>
+      </select> 
+
+    <label for="valor"> Valor</label>
+      <input type="text" class="form-control" id="valor" formControlName="valor" />
+      <label for="cnt_max">Cant. Personas </label>
+      <input type="text"  class="form-control" id="cnt_max" formControlName="cnt_max"/>
+  
+    </div>
+   <br>
+   
+<div class="card-actionbar-row">
+    <button class="btn ink-reaction btn-raised btn-primary" type="submit" style="float:right;"
+      [disabled]="!formGroup.valid">Grabar</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a mat-dialog-close style="float: right; margin-right: 5px;" (click)="cancelar()" class="btn ink-reaction btn-raised btn-danger">Cancelar</a>
+  </div>
+
+</form>
+</div>
+<mat-dialog-actions>
+
+</mat-dialog-actions>

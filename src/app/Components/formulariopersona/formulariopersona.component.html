@@ -1,0 +1,82 @@
+<form novalidate (ngSubmit)=" grabar();" [formGroup]="formGroup">
+    <div class="card card-bordered style-primary">
+      <div class="card-head">
+        <header></header>
+      </div>
+      <div class="card-body style-default-bright">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="nombres">Nombres</label>
+            <input type="text" class="form-control" id="nombres" required formControlName="nombres" />
+          </div>  
+          <div class="form-group col-md-4">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" class="form-control" id="apellidos" required formControlName="apellidos" />
+          </div>
+          <div class="form-group col-md-4">
+              <label for="apodo">Apodo</label>
+             <input type="text" class="form-control" id="apodo" formControlName="apodo" />
+          </div>
+        </div>
+        <div class="card-body style-default-bright">
+          <div class="form-row">
+            <div class="form-group col-md-4"> 
+         <label for="numero_identificacion">Numero Identificacion</label>
+         <input type="text" class="form-control" id="numero_identificacion"  formControlName="numero_identificacion" />         
+         </div>
+         <div class="form-group col-md-4"> 
+         <label for="tipo_identificacion">Tipo Identificacion</label>
+         <select class="form-control" formControlName="tipo_identificacion" id="tipo_identificacion"  >
+          <option [value]="tipoidentificacion.id" *ngFor="let tipoidentificacion of tipoidentificaciones">{{tipoidentificacion.descripcion}}</option>
+          </select>          
+         <!-- <select class="form-control" formControlName="tipo_identificacion" id="tipo_identificacion">
+          <option value="C" selected>Cedula</option>
+          <option value="P">Pasaporte</option>  
+          <option value="M">Menor</option>             
+       </select>  -->
+         </div>
+          </div>
+         </div>          
+        <div class="card-body style-default-bright">
+          <div class="form-row">
+            <div class="form-group col-md-4">          
+                <label for="fecha_nacimiento">Fecha Nancimiento</label>
+                <input type="date" class="form-control" id="fecha_nacimiento" required formControlName="fecha_nacimiento" />         
+              </div>
+              <div class="form-group col-md-4">          
+                <label for="lugar_nacimiento">Lugar Nancimiento</label>
+                <input type="text" class="form-control" id="lugar_nacimiento"  formControlName="lugar_nacimiento" /> 
+              </div>
+                <div class="form-group col-md-4">          
+                <label for="sexo">Sexo</label> 
+                <select class="form-control" formControlName="sexo" id="sexo">
+                  <option value="M" selected>Hombre</option>
+                  <option value="F">Mujer</option>            
+              </select>     
+              </div>
+              </div>
+              </div>
+              <div class="card-body style-default-bright">
+                <div class="form-row">
+                  <div class="form-group col-md-4">  
+       <label for="ocupacion">Ocupacion</label>
+       <input type="text" class="form-control" id="ocupacion"  formControlName="ocupacion" />     
+                  </div>        
+                  <div class="form-group col-md-4">  
+     <label for="raza">Raza</label>
+       <input type="text" class="form-control" id="raza"  formControlName="raza" />  
+                  </div>
+                  <div class="form-group col-md-4">  
+       <label for="procedencia">Procedencia</label>
+       <input type="text" class="form-control" id="procedencia"  formControlName="procedencia" />  
+                  </div></div></div>                           
+      </div>
+      <div class="card-actionbar style-default-bright">
+        <div class="card-actionbar-row">
+          <button class="btn ink-reaction btn-raised btn-primary" type="submit" [disabled]="!formGroup.valid">Grabar</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <a (click)="cancelar()" class="btn ink-reaction btn-raised btn-danger">Cancelar</a>
+        </div>
+      </div>
+    </div>
+  </form>

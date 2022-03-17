@@ -1,0 +1,82 @@
+
+<div class="row">
+    <div class="col">
+        <h1  style="float: left;" >Usuarios</h1>
+     </div>
+    <div class="col">
+       <button class="btn btn-primary" style="float: right;" *ngIf="User.id==0" (click)="buscaexistente()">Buscar Persona Existente</button>
+    </div>
+    </div>
+    <div style="background-color: rgb(116, 199, 224);">
+      <form novalidate (ngSubmit)=" grabar();" [formGroup]="formGroup">
+        <!-- <div class="card card-bordered style-primary"> -->
+          <div class="card-head">
+            <header></header>
+          </div>
+          <div class="form-row">
+            <input type="hidden" class="form-control" name="id" id="id" formControlName="id" />
+            <div class="form-group col-md-4">
+                <label for="user">Usuario</label>
+                <input type="text" class="form-control" id="user" name="user" required formControlName="user" />
+                <label for="roleId">Rol</label>
+                <select class="form-control" 
+                formControlName="roleId" name="roleId" id="roleId"  >
+                    <option [value]=rol.id *ngFor="let rol of roles">{{rol.descripcion}}</option>
+                </select> 
+                        
+                <label for="password">Clave</label>
+                <input type="password" name="password" class="form-control" id="password" required formControlName="password" />              
+                   
+            </div>
+          </div>
+          
+
+          <div class="card-body style-default-bright">
+            <div class="form-row">
+                
+              <div class="form-group col-md-4">
+                <label for="nombres">Nombres</label>
+                <input type="text" class="form-control" name="nombres" id="nombres"  formControlName="nombres" readonly />
+                
+              </div>
+             <div class="form-group col-md-4">
+                <label for="apellidos">Apellidos</label>
+                <input type="text" class="form-control" name="apellidos" id="apellidos"  formControlName="apellidos" readonly />
+              </div>
+              <div class="form-group col-md-3">
+                <label for="tipo_identificacion">Tipo Identificacion</label>
+                <input type="text" class="form-control" name="tipo_identificacion" id="tipo_identificacion"  formControlName="tipo_identificacion" readonly />  
+                <label for="numero_identificacion">Numero Identificacion</label>
+                <input type="text" class="form-control" id="numero_identificacion" readonly
+                  formControlName="numero_identificacion" />
+              </div> 
+            </div>
+    
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="ocupacion">Email </label>
+                <input type="text" class="form-control" id="email" formControlName="email" required />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="statusId">Status</label>
+                <select class="form-control"
+                formControlName="statusId" id="statusId"  >
+                    <option [value]=statu.id *ngFor="let statu of status">{{statu.descripcion}}</option>
+                </select>
+              </div>
+            </div>
+          </div> 
+
+          
+          
+      </form>
+    </div>
+    <mat-dialog-actions>
+        <div class="card-actionbar-row">
+            <button class="btn ink-reaction btn-raised btn-primary"  (click)="grabar()" type="submit" style="float:right;"
+              [disabled]="!formGroup.valid">Grabar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a mat-dialog-close style="float: right; margin-right: 5px;" (click)="cancelar()" class="btn ink-reaction btn-raised btn-danger">Cancelar</a>
+          </div>
+          <br/> 
+    </mat-dialog-actions>

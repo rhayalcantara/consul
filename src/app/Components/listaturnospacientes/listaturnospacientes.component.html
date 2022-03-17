@@ -1,0 +1,55 @@
+<h1 id="tableLabel">Turnos Pacientes</h1>
+<h2>{{doctor}} </h2>
+<h3></h3>
+<div class="input-group">
+    <input class="form-control" type="text" 
+           placeholder="Search for..." 
+           aria-label="Search for..." 
+           aria-describedby="btnNavbarSearch" 
+           style="margin-bottom:5px; margin-left:-14px"
+           (change)="buscar($event)" />
+    
+  </div>
+  
+
+  
+  <p *ngIf="!lpturnos"><em>Cargando...</em></p>
+  
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="lpturnos">
+    <thead>
+      <tr>
+        <th>Paciente</th>
+        <th>Doctor</th>
+        <th>Tanda</th>
+        <th>Numero</th>
+        <th>Status</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lpturno of lpturnos">
+        <td>{{lpturno.paciente }}</td>
+        <td>{{lpturno.doctor}}</td>
+        <td>{{lpturno.tanddescripcion}}</td> 
+        <td>{{lpturno.numero}}</td> 
+        <td>{{lpturno.statusdescripcion}}</td>
+        <td>{{lpturno.valor}}</td>  
+        <td>
+            <button  class="btn btn-primary" (click)="llamar(lpturno);">LLamar a Caja</button>
+        </td>
+        <td >
+          <button  class="btn btn-secondary" (click)="llamar2(lpturno);">LLamar a Consultorio</button>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+ <!-- <pagination-controls [maxSize]="maxSize"
+                      [directionLinks]="directionLinks"
+                      [autoHide]="autoHide"
+                      [responsive]="responsive"
+                      [previousLabel]="labels.previousLabel"
+                      [nextLabel]="labels.nextLabel"
+                      [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                      [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                      [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                      (pageChange)="onPageChange($event)"></pagination-controls> -->

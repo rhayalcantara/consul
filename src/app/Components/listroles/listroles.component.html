@@ -1,0 +1,55 @@
+
+
+<h1> Roles</h1>
+<div class="input-group">
+    <input class="form-control" type="text" 
+           placeholder="Search for..." 
+           aria-label="Search for..." 
+           aria-describedby="btnNavbarSearch" 
+           style="margin-bottom:5px; margin-left:-14px"
+           (ngModel)="term" />
+    
+  </div>
+  
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a (click)="abrirmodal() " class="nav-link active">  Agregar</a>
+    </li>
+  </ul>
+  
+  <p *ngIf="!Roles"><em>No Hay Roles...</em></p>
+  
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="Roles">
+    <thead>
+      <tr>
+        <th>Descripcion</th>
+        <th>Nivel</th>
+        <th>Opcion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rol of Roles | filter: term">
+        <td>{{ rol.descripcion }}</td>
+        <td>{{ rol.nivel}}</td>
+        <td>
+            <button class="btn btn-primary" (click)="abrirmodaledit(rol);">Editar</button>
+        </td>
+         <td><button class="btn btn-danger" (click)=" delete(rol);">Eliminar</button></td>            
+        
+      </tr>
+    </tbody>
+  </table>
+  
+
+<!--  
+   <pagination-controls [maxSize]="maxSize"
+  [directionLinks]="directionLinks"
+  [autoHide]="autoHide"
+  [responsive]="responsive"
+  [previousLabel]="labels.previousLabel"
+  [nextLabel]="labels.nextLabel"
+  [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+  [screenReaderPageLabel]="labels.screenReaderPageLabel"
+  [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+  (pageChange)="onPageChange($event)"></pagination-controls>  
+    -->

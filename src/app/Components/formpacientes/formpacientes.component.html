@@ -1,0 +1,67 @@
+<p>Listados de Pacientes Registrados:{{totalregistros}}</p>
+<div class="input-group">
+    <input class="form-control" type="text" 
+           placeholder="Search for..." 
+           aria-label="Search for..." 
+           aria-describedby="btnNavbarSearch" 
+           style="margin-bottom:5px; margin-left:-14px"
+           (change)="buscar($event)"
+            />
+    
+  </div>
+  
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a (click)="abrilformulario() " class="nav-link active">  Agregar</a>
+    </li>
+  </ul>
+  
+  <p *ngIf="!pacientepersonas"><em>Cargando...</em></p>
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="pacientepersonas"  width=100%>
+    <thead>
+      <tr>
+        <th width=20%>Nombres</th>
+        <th width=20%>Apellidos(C)</th>
+        <th width=20%>numero_identificacion</th>
+        <th width=20%>tipo_identificacion</th>
+        <th width=20%>Editar</th>
+  
+      </tr>
+    </thead>
+  </table>
+  <div id="div1">    
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="pacientepersonas"  width=100%>
+
+    <tbody>
+      <tr *ngFor="let paciente of pacientepersonas   ">
+        <td width=20%>{{ paciente.persona.nombres }}</td>
+        <td width=20%>{{ paciente.persona.apellidos }}</td>
+        <td width=20%>{{ paciente.persona.numero_identificacion}}</td>
+        <td width=20%>{{ paciente.tipoIdentificacion.descripcion }}</td>
+        <td width=20%>
+          <button class="btn btn-primary" (click)="abrilformularioeditar(paciente);" *ngIf="!busqueda">Editar</button>
+          <button mat-button [mat-dialog-close]="persona" *ngIf="busqueda">Selecionar</button>
+        </td>
+        <!-- <td><button class="btn btn-danger" (click)=" delete(paciente);">Eliminar</button></td> -->
+  
+      </tr>
+    </tbody>
+  </table>
+</div>
+  <mat-paginator #paginator [length]="totalSize"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="[2, 5, 10, 20]"
+               (page)="handlePage($event)"
+               showFirstLastButtons=true>
+</mat-paginator>
+
+   <!-- <pagination-controls  [maxSize]="maxSize"
+                        [directionLinks]="directionLinks"
+                        [autoHide]="autoHide"
+                        [responsive]="responsive"
+                        [previousLabel]="labels.previousLabel"
+                        [nextLabel]="labels.nextLabel"
+                        [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                        [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                        [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                        (pageChange)="onPageChange($event)"></pagination-controls>  -->

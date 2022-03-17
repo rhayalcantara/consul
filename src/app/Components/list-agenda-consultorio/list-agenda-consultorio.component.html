@@ -1,0 +1,53 @@
+
+<h1 id="tableLabel">Configuracion Consultorios</h1>
+
+<div class="input-group">
+    <input class="form-control" type="text" 
+           placeholder="Search for..." 
+           aria-label="Search for..." 
+           aria-describedby="btnNavbarSearch" 
+           style="margin-bottom:5px; margin-left:-14px"
+           (change)="buscar($event)" />
+    
+  </div>
+  
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a (click)="abrirmodal() " class="nav-link active">  Agregar</a>
+    </li>
+  </ul>
+  
+  <p *ngIf="!agendaconsultorios"><em>Cargando...</em></p>
+  
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="agendaconsultorios">
+    <thead>
+      <tr>
+        <th>Descripcion</th>
+        <th>Doctor</th>
+        <th>especialidad</th>
+        <th>Opcion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let agendaconsultorio of agendaconsultorios   ">
+         <td>{{ agendaconsultorio.consultorio.descripcion }}</td>
+        <td>{{ agendaconsultorio.doctordts.persona.nombres}} {{ agendaconsultorio.doctordts.persona.apellidos}}</td>
+        <td>{{ agendaconsultorio.doctordts.especialidad.descripcion}}</td> 
+        <td>
+            <button class="btn btn-primary" (click)="abrirmodaledit(agendaconsultorio);">Editar</button>
+        </td>
+         <!--<td><button class="btn btn-danger" (click)=" delete(consultorio);">Eliminar</button></td>-->
+      </tr>
+    </tbody>
+  </table>
+ <!-- <pagination-controls [maxSize]="maxSize"
+                      [directionLinks]="directionLinks"
+                      [autoHide]="autoHide"
+                      [responsive]="responsive"
+                      [previousLabel]="labels.previousLabel"
+                      [nextLabel]="labels.nextLabel"
+                      [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                      [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                      [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                      (pageChange)="onPageChange($event)"></pagination-controls> 
+   -->

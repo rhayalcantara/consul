@@ -1,0 +1,62 @@
+<h2>Busqueda de Persona</h2>
+<mat-dialog-content >
+
+<div class="input-group">
+  <input class="form-control" type="text" 
+         placeholder="Search for..." 
+         aria-label="Search for..." 
+         aria-describedby="btnNavbarSearch" 
+         style="margin-bottom:5px; margin-left:-14px"
+         [(ngModel)]="term" />
+  
+</div>
+
+<!-- <ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a (click)="abrirmodal() " class="nav-link active">  Agregar</a>
+  </li>
+</ul> -->
+
+<p *ngIf="!personas"><em>Cargando...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="personas">
+  <thead>
+    <tr>
+      <th>Nombres</th>
+      <th>Apellidos(C)</th>
+      <th>numero_identificacion</th>
+      <th>tipo_identificacion</th>
+      <th>Opcion</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let persona of personas | filter: term   ">
+      <td>{{ persona.nombres }}</td>
+      <td>{{ persona.apellidos }}</td>
+      <td>{{ persona.numero_identificacion }}</td>
+      <td>{{ persona.tipo_identificacion }}</td>
+      <td>
+        <button mat-button [mat-dialog-close]="persona">Selecionar</button>
+      </td>
+
+
+    </tr>
+  </tbody>
+</table>
+<!-- <pagination-controls [maxSize]="maxSize"
+                                   [directionLinks]="directionLinks"
+                                   [autoHide]="autoHide"
+                                   [responsive]="responsive"
+                                   [previousLabel]="labels.previousLabel"
+                                   [nextLabel]="labels.nextLabel"
+                                   [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                                   [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                                   [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                                   (pageChange)="onPageChange($event)"></pagination-controls> -->
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close> cancelar</button>
+</mat-dialog-actions>

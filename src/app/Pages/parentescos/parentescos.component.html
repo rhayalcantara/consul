@@ -1,0 +1,51 @@
+<h1 id="tableLabel">Parentescos</h1>
+
+<p>Listados de Parentescos </p>
+<div class="input-group">
+  <input class="form-control" type="text" 
+         placeholder="Search for..." 
+         aria-label="Search for..." 
+         aria-describedby="btnNavbarSearch" 
+         style="margin-bottom:5px; margin-left:-14px"
+         (ngModel)="term" />
+  
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a (click)="abrirmodal() " class="nav-link active">  Agregar</a>
+  </li>
+</ul>
+
+<p *ngIf="!parentescos"><em>Cargando...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="parentescos">
+  <thead>
+    <tr>
+      <th>Parentesco</th>
+      <th>Editar</th>
+      <!-- <th>Eliminar</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let parentesco of parentescos | filter: term  ">
+      <td>{{ parentesco.parentesco }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="abrirmodaledit(parentesco);">Editar</button>
+      </td>
+      <!-- <td><button class="btn btn-danger" (click)=" delete(parentesco);">Eliminar</button></td> -->
+
+    </tr>
+  </tbody>
+</table>
+<!-- <pagination-controls [maxSize]="maxSize"
+                                   [directionLinks]="directionLinks"
+                                   [autoHide]="autoHide"
+                                   [responsive]="responsive"
+                                   [previousLabel]="labels.previousLabel"
+                                   [nextLabel]="labels.nextLabel"
+                                   [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                                   [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                                   [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                                   (pageChange)="onPageChange($event)"></pagination-controls> -->
+

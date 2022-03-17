@@ -1,0 +1,62 @@
+<h1 id="tableLabel">Doctores</h1>
+
+<p>Listados de Doctores Registrados:{{ doctores.length}}</p>
+<div class="input-group">
+  <input class="form-control" type="text" 
+         placeholder="Search for..." 
+         aria-label="Search for..." 
+         aria-describedby="btnNavbarSearch" 
+         style="margin-bottom:5px; margin-left:-14px"
+         (ngModel)="term" />
+  
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a (click)="abrirmodal() " class="nav-link active">  Agregar</a>
+  </li>
+</ul>
+
+<p *ngIf="!doctores"><em>Cargando...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="doctores">
+  <thead>
+    <tr>
+      <th>Nombres</th>
+      <th>Apellidos(C)</th>
+      <th>Especialidad</th>
+      <th>Editar</th>
+      <!-- <th>Eliminar</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let doctor of doctores | filter: term  ">
+      <td>{{ doctor.persona.nombres }}</td>
+      <td>{{ doctor.persona.apellidos }}</td>
+      <td>{{ doctor.especialidad.descripcion }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="abrirmodaledit(doctor);">Editar</button>
+      </td>
+      <!-- <td><button class="btn btn-danger" (click)=" delete(doctor);">Eliminar</button></td> -->
+
+    </tr>
+  </tbody>
+</table>
+<mat-paginator #paginator [length]="totalSize"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="[2, 5, 10, 20]"
+               (page)="handlePage($event)"
+               showFirstLastButtons=true>
+</mat-paginator>
+
+
+<!-- <pagination-controls [maxSize]="maxSize"
+[directionLinks]="directionLinks"
+[autoHide]="autoHide"
+[responsive]="responsive"
+[previousLabel]="labels.previousLabel"
+[nextLabel]="labels.nextLabel"
+[screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+[screenReaderPageLabel]="labels.screenReaderPageLabel"
+[screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+(pageChange)="onPageChange($event)"></pagination-controls> -->

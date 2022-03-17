@@ -1,0 +1,80 @@
+<h1 id="tableLabel">Tipo de Status</h1>
+
+<p>Listados Tipo de Status</p>
+
+<div class="col-md-4">
+  <div class="input-group">
+    <input class="form-control" type="text" 
+           placeholder="Search for..." 
+           aria-label="Search for..." 
+           aria-describedby="btnNavbarSearch" 
+           style="margin-bottom:5px; margin-left:-14px"
+           [(ngModel)]="term" />
+    
+  </div>
+</div>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a (click)="modal.open(content);" class="nav-link active">  Agregar</a>
+  </li>
+</ul>
+
+<p *ngIf="!status"><em>Cargando...</em></p>
+<!--<input type="text" class="form-control" id="ccc" [(ngModel)]="term">-->
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="status">
+  <thead>
+    <tr>
+      <th>Descripcion</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let statu of status  | filter: term   ">
+      <td>{{ statu.descripcion }}</td>
+      <td>
+
+        <button class="btn btn-primary" (click)="modal.open(content); edit(statu);">Editar</button>
+      </td>
+      <td><button class="btn btn-danger" (click)=" delete(statu);">Eliminar</button></td>
+
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"><i class="fa fa-fw fa-cogs"></i>&nbsp;Mantenimiento Status</h4>
+    <!--<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>-->
+  </div>
+  <div class="modal-body">
+
+    <form class="form-horizontal" novalidate (ngSubmit)=" modal.close(); save()" [formGroup]="formGroup">
+      <div class="card card-bordered style-primary">
+        <div class="card-head">
+          <header></header>
+        </div>
+        <div class="card-body style-default-bright">
+          <label for="languageName">Descripcion</label>
+          <input type="text" class="form-control" id="descripcion" required formControlName="descripcion" />
+        </div>
+        <div class="card-actionbar style-default-bright">
+          <div class="card-actionbar-row">
+            <button class="btn ink-reaction btn-raised btn-primary" type="submit" [disabled]="!formGroup.valid">Grabar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a  (click)="modal.close();formClear();" class="btn ink-reaction btn-raised btn-danger">Cancelar</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <!--<button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>-->
+  </div>
+
+</ng-template>
+
+
