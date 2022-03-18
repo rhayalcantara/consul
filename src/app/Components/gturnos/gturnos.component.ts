@@ -116,8 +116,13 @@ export class GturnosComponent implements OnInit {
     });    
   }
   grabar(){
+    
     this.turno.cobrado =+this.formGroup.controls["cobrado"].value
-    console.log(this.turno);
+    if ( (this.turno.valor - this.turno.cobrado)!=0 ){
+      this.datosservices.showMessage("Hay Diferencias entre lo Cobrado y el valor a Cobrar","Error","Error");
+      return
+    }
+    
     this.datosservices.insertTurno(this.turno).subscribe((resp)=>{
       this.turno= resp;
       
