@@ -35,9 +35,13 @@ export class ListaturnosComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe((result) => {
 
- 
-      this.datos.showMessage("Numero : " + result.numero,"Turno","success")  
-      this.getturnos(this.fecha);
+      if (result!=null) {
+        this.datos.showMessage("Numero : " + result.numero,"Turno","success")  
+        this.getturnos(this.fecha);
+      }else{
+        this.datos.showMessage("No se Creo el Turno","Turno","error") 
+      }
+
     });
   }
   listar(lturno:Lturno){    
