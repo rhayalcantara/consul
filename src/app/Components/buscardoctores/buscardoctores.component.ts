@@ -14,33 +14,50 @@ export class BuscardoctoresComponent implements OnInit {
   public config: any;
   public labels: any;
   public term:string ="";
+
+  public totalSize: number = 0;
+  public pageSize: number = 5;
+  public currentPage: number = 0;
+  public loading:boolean = false;
   constructor(private toastr: MatDialog,
     private datosservice:DatosService) { }
 
     ngOnInit() {
-      this.getdoctores();
+      this.loading=true;
+      this.getcount();
     }
-    onPageChange(event:any) {
-      this.config.currentPage = event;
-    }
+
+    public handlePage(e: any) {
+ 
+      this.currentPage = e.pageIndex;
+      this.pageSize = e.pageSize;
+      this.buscar();
+
+  }
+  getcount(){
+    this.datosservice.GetDoctorescount().subscribe(rep=>{
+      this.totalSize = rep
+    });
+    this.getdoctores();
+  }
+  getcountfiltro(){
+    this.datosservice.GetDoctorescountfiltro(this.term).subscribe(rep=>{
+      this.totalSize = rep
+    });
+    this.getdoctoresfiltro();
+  }
     getdoctores(){
-      this.datosservice.GetDoctores().subscribe(rep =>{
-        this.doctores=rep;
-        this.config = {
-          itemsPerPage: 5,
-          currentPage: 1,
-          totalItems: this.doctores.length
-        };
-        this.labels = {
-          previousLabel: "<",
-          nextLabel: ">",
-          screenReaderPaginationLabel: "paginacion",
-          screenReaderPageLabel: "paginacion1",
-          screenReaderCurrentLabel: "paginacion2"
-        };        
-      })
+      this.datosservice.GetDoctoresPaginacion(this.currentPage,this.pageSize).subscribe(rep =>{
+        this.doctores=rep;   
+        this.loading=false;
+      });
     }
-  
+    getdoctoresfiltro(){
+      this.datosservice.GetDoctoresfiltro(this.currentPage,this.pageSize,this.term).subscribe(rep =>{
+        this.doctores=rep; 
+        this.loading=false;  
+      });
+    }
     abrirmodal(){
       let doctor:Doctordts={
         id:0,
@@ -86,5 +103,13 @@ export class BuscardoctoresComponent implements OnInit {
         this.getdoctores();
       }); 
     }
-
+    buscar(){
+      this.currentPage=0;
+      this.loading=true;
+      if (this.term.length==0){
+        this.getcount();
+      }else{
+        this.getcountfiltro();
+      }
+    }
 }

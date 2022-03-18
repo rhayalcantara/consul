@@ -4,10 +4,11 @@
            aria-label="Search for..." 
            aria-describedby="btnNavbarSearch" 
            style="margin-bottom:5px; margin-left:-14px"
-           [(ngModel)]="term" />
+           [(ngModel)]="term"
+           (change)="buscar()" />
     
   </div>
-  
+  <div class="loader" *ngIf="loading"></div>
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
       <a (click)="abrirmodal() " class="nav-link active">  Agregar</a>
@@ -25,8 +26,11 @@
         <th>Opcion</th>
       </tr>
     </thead>
+  </table>
+  <div id="div1">
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="doctores">   
     <tbody>
-      <tr *ngFor="let doctor of doctores | filter: term  ">
+      <tr *ngFor="let doctor of doctores  ">
         <td>{{ doctor.persona.nombres }}</td>
         <td>{{ doctor.persona.apellidos }}</td>
         <td>{{ doctor.especialidad.descripcion }}</td>
@@ -38,6 +42,14 @@
       </tr>
     </tbody>
   </table>
+  </div>
+  
+  <mat-paginator #paginator [length]="totalSize"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[2, 5, 10, 20]"
+  (page)="handlePage($event)"
+  showFirstLastButtons=true>
+</mat-paginator>
   <!-- <pagination-controls [maxSize]="maxSize"
   [directionLinks]="directionLinks"
   [autoHide]="autoHide"

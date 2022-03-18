@@ -19,8 +19,8 @@ export class DatosService {
  
  
   //public Url: String = "http://192.168.0.10:9095/api/";
- // public url_root:string = "https://localhost:5001/"
-  public url_root:string = "http://rhayalcantara-001-site2.ftempurl.com/"
+  public url_root:string = "https://localhost:5001/"
+  //public url_root:string = "http://rhayalcantara-001-site2.ftempurl.com/"
    public Url: string = this.url_root+"api/";
   // public Url: string = "http://rhayalcantara-001-site2.ftempurl.com/api/";
     public get urlserver(): string {
@@ -370,8 +370,20 @@ public UpdateConsulta(obj: Consultas){
 }
 
 //doctores
+public GetDoctorescount(): Observable<number> {
+  return this.http.get<number>(this.Url + `doctors/cuenta`);
+}
+public GetDoctorescountfiltro(filtro: string): Observable<number> {
+  return this.http.get<number>(this.Url + `doctors/cuentafiltro?filtro=${filtro}`);
+}
 public GetDoctores(): Observable<Doctordts[]> {
-  return this.http.get<Doctordts[]>(this.Url + 'doctors/dts');
+  return this.http.get<Doctordts[]>(this.Url + `doctors/dts`);
+}
+public GetDoctoresPaginacion(page: number,pageSize: number): Observable<Doctordts[]> {
+  return this.http.get<Doctordts[]>(this.Url + `doctors/dtspaginacion?page=${page}&pageSize=${pageSize}`);
+}
+public GetDoctoresfiltro(page: number,pageSize: number,filtro:string): Observable<Doctordts[]> {
+  return this.http.get<Doctordts[]>(this.Url + `doctors/dtsfiltro?page=${page}&pageSize=${pageSize}&filtro=${filtro}`);
 }
 public GetDoctor(id:number):Observable<Doctordts>{
   return this.http.get<Doctordts>(this.Url + `doctors/dts/${id}`);

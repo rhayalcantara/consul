@@ -224,7 +224,7 @@ export class FormularioConsultaComponent implements OnInit {
   }
 
   abribusquedapaciente(){
-    const dialogRef = this.toastr.open(BuscarpacientesComponent,{data:""});
+    const dialogRef = this.toastr.open(BuscarpacientesComponent,{width:"70%" ,height:"80%" ,data:""});
 
   
     dialogRef.afterClosed().subscribe(result => {
@@ -236,7 +236,7 @@ export class FormularioConsultaComponent implements OnInit {
     });    
   }
   abribusquedadoctores(){
-    const dialogRef = this.toastr.open(BuscardoctoresComponent,{data:""});
+    const dialogRef = this.toastr.open(BuscardoctoresComponent,{width:"70%" ,height:"80%" ,data:""});
 
   
     dialogRef.afterClosed().subscribe(result => {
