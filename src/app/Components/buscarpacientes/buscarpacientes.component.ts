@@ -18,7 +18,7 @@ export class BuscarpacientesComponent implements OnInit {
     fechacreacion: new Date(),
     historial_clinico:""
   };
-  
+  public loading:boolean = false;
   private persona:Persona ={
     id:0,
     nombres:"",
@@ -52,9 +52,11 @@ export class BuscarpacientesComponent implements OnInit {
     private toastr: MatDialog) { }
 
   ngOnInit() {
+    this.loading = true;
     this.getdatos();
   }
   onPageChange(event:any) {
+    this.loading = true;
     this.page = event.pageIndex;
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
@@ -71,24 +73,13 @@ export class BuscarpacientesComponent implements OnInit {
     this.dataservice.GetPacientePersonasCount().subscribe(rep=>{
       this.totalregistros =rep;
       this.totalSize =rep;
-      this.config = {
-        itemsPerPage: 5,
-        currentPage: 1,
-        totalItems: rep
-      };
-      this.labels = {
-        previousLabel: "<",
-        nextLabel: ">",
-        screenReaderPaginationLabel: "paginacion",
-        screenReaderPageLabel: "paginacion1",
-        screenReaderCurrentLabel: "paginacion2"
-      };  
         
     });
     this.updatedatos(this.page);
   }
 
   buscar(event:any){
+    this.loading = true;
     this.textobuscar=event.target.value;
     if (this.textobuscar==''){
       // si limpia entonces ir a la primera pagina    
@@ -119,15 +110,18 @@ export class BuscarpacientesComponent implements OnInit {
   }
 
   updatedatos(page: number){
+    
     this.currentPage=page
     this.dataservice.GetPacientePersonas(page,this.pageSize).subscribe(rep =>{
-      this.pacientepersonas = rep;                      
+      this.pacientepersonas = rep;    
+      this.loading = false;                  
     });  
   }
   updatedatosfiltro(page: number,texto:string){
     this.currentPage=page
     this.dataservice.GetPacientePersonasfiltro(page,this.pageSize,texto).subscribe(rep =>{
-      this.pacientepersonas = rep;                      
+      this.pacientepersonas = rep;   
+      this.loading = false;                   
     });  
   }
 
