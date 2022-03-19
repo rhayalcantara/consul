@@ -6,6 +6,9 @@
       <mat-icon *ngIf="sidenav.opened"> close</mat-icon>
     </button>
     Dispensario Medico San Agustin 
+
+      <p class="name2" style="left: 100px  ;">Usuario:{{userdts.persona}}</p>
+      <p class="designation2">Rol:{{userdts.rol}}</p>
   </mat-toolbar>
   <mat-sidenav-container style="height: 90%;">
   
@@ -23,11 +26,15 @@
         </button>
      </ng-container>   
      <mat-divider></mat-divider>
-      <button mat-button class="menu-button" (click)="logout()">
+      <button mat-button class="menu-button" (click)="logout()" *ngIf="navMenus.length > 0">
         <span>Logout</span>
       </button>    
+      <button mat-button class="menu-button" (click)="login()" *ngIf="navMenus.length==0">
+        <span>login</span>
+      </button>        
+      <mat-divider></mat-divider>
     </mat-sidenav>
-    <mat-divider></mat-divider>
+    
     
     <mat-sidenav-content >   
        <div class="mat-elevation-z4" style="height: 96%; margin-top: 16px; margin-left:30px;width:95%;">

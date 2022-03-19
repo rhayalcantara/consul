@@ -23,12 +23,10 @@ export class AuthGuard implements CanActivate {
             let path:string = "/"+route.url[0].path
             
             if (usuario.menues.find(x=>x.url === path)){
-                console.log(path)
                 return true;
             }else{
                 this.datoservice.logout();
                 this.router.navigate([''], { queryParams: { returnUrl: state.url }});
-                //this.router.navigateByUrl('');
                 return false;
             }
             

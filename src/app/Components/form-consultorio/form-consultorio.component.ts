@@ -45,7 +45,7 @@ export class FormConsultorioComponent implements OnInit {
     grabar(){
       //actualiza la persona con los datos del usuario
       
-      this.consultorio =JSON.parse(JSON.stringify(this.formGroup.controls));
+      this.consultorio =JSON.parse(JSON.stringify(this.formGroup.value));
       // for (let control of this.campos) {
       //     if (control=="descripcion"){
       //       this.consultorio[control]=this.formGroup.controls[control].value;

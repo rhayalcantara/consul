@@ -42,13 +42,17 @@ export class NavMenuComponent implements OnInit {
     private router: Router
     ) { 
       this.datos.usuario.subscribe(rep =>{
-        if (rep != null){
+        console.log(rep);
+        if (rep.menuhome != null){
           this.usuario = rep;
           this.navMenus=this.usuario.menues
+          this.mostrarmenu=true;
+          console.log(this.navMenus)
           this.datos.GetUsername(this.usuario.username).subscribe((user) =>{
           
             this.userdts = user; 
             //this.consiguemenu(this.userdts.id.toString())
+            
          
         });          
         }         
@@ -85,14 +89,26 @@ export class NavMenuComponent implements OnInit {
       
   logout(){
    // this.mostrarmenu=false;
-   
-    this.cerrarmenu();
+   this.usuario=null!;
+   this.navMenus=[];
+   this.userdts.persona='';
+   this.userdts.rol='';
+   this.sidenav.mode='side';
     this.datos.logout();
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('inicio');
+    //window.location.reload();
+
    
   }
 
   
-
+login() {
+  this.sidenav.mode='over';
+  this.cerrarmenu();
+ 
+  this.router.navigateByUrl('inicio');
+  
+  window.location.reload();
+}
 
 }

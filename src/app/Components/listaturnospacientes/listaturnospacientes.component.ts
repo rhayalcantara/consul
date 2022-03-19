@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit} from '@angular/core';
+import { Component, Inject, Input, OnInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Turno, TurnoDTS } from 'src/app/Interfaces/interfaces';
 import { DatosService } from 'src/app/Services/datos.service';
@@ -11,8 +11,7 @@ import { DatosService } from 'src/app/Services/datos.service';
 })
 export class ListaturnospacientesComponent implements OnInit {
   public lpturnos:TurnoDTS[]=[];
-  public fecha:string="";
-  public acid:number=0;
+ 
   public doctor:string="";
   public tanda:string="";
 
@@ -20,10 +19,16 @@ export class ListaturnospacientesComponent implements OnInit {
   private dialogRef: MatDialogRef<ListaturnospacientesComponent>,
   public datos:DatosService) { }
 
+  @Input() fecha:string="";
+  @Input() acid:number=0;
+
   ngOnInit() {
     this.dialogRef.updateSize('70%', '60%');
-    this.fecha = this.data.LTurno.fecha;
-    this.acid = this.data.LTurno.id;
+    if (this.data){
+      this.fecha = this.data.LTurno.fecha;
+      this.acid = this.data.LTurno.id;  
+    }
+
     //console.log(this.data,'fecha',this.fecha,'acid',this.acid);
     this.getturnospacientes();
   }

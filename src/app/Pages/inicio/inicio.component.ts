@@ -16,31 +16,42 @@ export class InicioComponent implements OnInit {
     private toastr: MatDialog ,
     private router: Router,
     private datos:DatosService) { }
-
+    private usuario:Usuario=null!;
   ngOnInit() {
     
   }
   
   ngAfterViewInit() {
-    let usuario:Usuario = this.datos.usuarioData;
+     this.usuario = this.datos.usuarioData;
     
-    if (usuario.menuhome!=null) {
-      let n = usuario.menuhome-1;
-      console.log('Menuhome',n)
-      this.router.navigateByUrl(usuario.menues[n].url);
+    if (this.usuario.menuhome!=null) {
+ 
+      this.activamenu();
       
     }else{
 
        const dialogRef = this.toastr.open(LoginComponent,{disableClose:true });
       
       dialogRef.afterClosed().subscribe((result) => {
-        usuario = this.datos.usuarioData;
-        let n = usuario.menuhome-1;
-        console.log('Menuhome',n)
-        this.router.navigateByUrl(usuario.menues[n].url);
+        this.usuario = this.datos.usuarioData;
+        this.activamenu();
+       
         });
+          
+        
     }
 
+    }
+
+    activamenu(){
+      
+      this.usuario.menues.forEach((menue) => {
+    
+        if(menue.id==this.usuario.menuhome){
+  
+          this.router.navigateByUrl(menue.url);
+        }
+      })
     }
 
 }

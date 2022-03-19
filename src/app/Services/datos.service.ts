@@ -18,9 +18,9 @@ export class DatosService {
 
  
  
-  //public Url: String = "http://192.168.0.10:9095/api/";
-  //public url_root:string = "https://localhost:5001/"
-  public url_root:string = "http://rhayalcantara-001-site2.ftempurl.com/"
+  //public url_root: string = "http://192.168.0.10:9095/";
+  public url_root:string = "https://localhost:5001/"
+  //public url_root:string = "http://rhayalcantara-001-site2.ftempurl.com/"
    public Url: string = this.url_root+"api/";
   // public Url: string = "http://rhayalcantara-001-site2.ftempurl.com/api/";
     public get urlserver(): string {

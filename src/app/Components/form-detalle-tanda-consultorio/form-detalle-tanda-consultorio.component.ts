@@ -61,7 +61,7 @@ export class FormDetalleTandaConsultorioComponent implements OnInit {
   }
   grabar(){
         //actualiza la persona con los datos del usuario
-    this.agendaConsultoriodetalle=JSON.parse(JSON.stringify(this.formGroup.controls));
+    this.agendaConsultoriodetalle=JSON.parse(JSON.stringify(this.formGroup.value));
       // for (let control of this.campos) {
       //     this.agendaConsultoriodetalle[control]=+this.formGroup.controls[control].value;
       // }

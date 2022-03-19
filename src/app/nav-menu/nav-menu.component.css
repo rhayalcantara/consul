@@ -76,6 +76,18 @@ a.navbar-brand {
       font-size:0.7rem;
       color:lightgrey;    
   }
+
+  .name2{
+    margin-top:2px;
+    margin-left:60%;
+    font-size:1.0rem;
+}
+  .designation2{
+    margin-top:2px;
+    margin-left:10px;
+    font-size:0.7rem;
+    color:lightgrey;    
+}
   
   mat-divider {
     margin-top: 16px;

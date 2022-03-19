@@ -97,7 +97,7 @@ export class FormCobroConsultaComponent implements OnInit {
       this.turno.cobrado=n;
       this.turno.status=16;
       this.datos.UpdateTurno(this.turno).subscribe((rep)=>{
-        this.datos.showMessage("Grabado","Mensage del Sistema","info");
+        this.datos.showMessage("Grabado","Mensage del Sistema","success");
         this.dialogRef.close(this.turno);
       })
     }

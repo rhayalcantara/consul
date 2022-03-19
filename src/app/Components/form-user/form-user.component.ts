@@ -141,28 +141,49 @@ export class FormUserComponent implements OnInit {
   });
 
 }
+anytostring(x:any):string{
+  return x.toString();
+}
+anytonumber(x:any):number{
+  return x.toNumber();
+}
 grabar(){
 
-  // for (let control of this.campos) {
-  //   if (control=='id' || control=='personsaId' || control=='roleId' || control=='statusId'){
-  //     this.User[control]=+this.formGroup.controls[control].value;
-  //   }else{
+  // for (const control in this.User) {
 
-  //     this.User[control]=this.formGroup.controls[control].value;
-  //   }
-      
+  //   // if (control=='id' || control=='personaId' || control=='roleId' || control=='statusId'){
+  //   //   this.User[control]=+this.formGroup.controls[control].value
+  //   // }else{
+  //   //   if(control=='user'|| control=='password'|| control=='email'|| control=='phone'  ){
+  //   //      this.User[control]=this.formGroup.controls[control].value
+  //   //   }
+   
+  //   // }
+  //   console.log(this.formGroup.controls[control].value)
+  //   console.log(this.User)  
   // }  
-  this.User=JSON.parse(JSON.stringify(this.formGroup.controls));
+
+  //this.User=this.formGroup.value as User
+ // this.User=this.castAny<User>(this.User,this.formGroup.value)
+  
+  this.User = JSON.parse(JSON.stringify(this.formGroup.value))
+  console.log(this.User)  
+
+  // console.log('antes',this.User)
+  // this.User=JSON.parse(JSON.stringify(this.formGroup.controls));
+  // console.log('despues',this.User)
+
   if(this.User.personaId==0 || this.User.personaId==null){
-    this.datos.showMessage("Selecione una Persona","Error Falta Persona","success");
+    this.datos.showMessage("Selecione una Persona","Error Falta Persona","error");
     return;
   }
-  this.User.password = this.User.password;
-  if (this.User.id==0){
-    
+
+  // this.User.password = this.User.password;
+  if (this.User.id==0 || this.User.id==null ){
+    this.User.id=0;
     this.datos.insertuser(this.User).subscribe((result) => {      
       this.dialogRef.close(result);
-    });
+    }),(error:any) => {console.log("error",error);};
   }else{
     
     this.datos.Updateuser(this.User).subscribe((result) => {
@@ -174,4 +195,14 @@ grabar(){
 cancelar(){
   this.dialogRef.close();
 }
+castAny<T>(target: T, source: object): T {
+  const result: T = Object.assign({}, target);
+  Object.keys(target).forEach(key => {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      result[key as keyof T] = source[key as keyof typeof source];
+    }
+  });
+  return result;
+}
+
 }

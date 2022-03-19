@@ -29,14 +29,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.formGroup.controls)
+
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.formGroup.controls; }
 
   onSubmit() {
-      console.log(this.formGroup.controls)
      this.submitted = true;
 
 

@@ -46,7 +46,7 @@ export class FormRolComponent implements OnInit {
     //   }
      
     //}
-    this.rol=JSON.parse(JSON.stringify(this.formGroup.controls));
+    this.rol=JSON.parse(JSON.stringify(this.formGroup.value));
     if (this.rol.id==0){
       this.datos.insertRoles(this.rol).subscribe((rep)=>{
         this.rol.id=rep.id;

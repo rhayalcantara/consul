@@ -48,7 +48,7 @@ export class FormTandaComponent implements OnInit {
     // for (let control of this.campos) {
     //     this.tanda[control]=this.formGroup.controls[control].value;
     // }
-    this.tanda=JSON.parse(JSON.stringify(this.formGroup.controls));
+    this.tanda=JSON.parse(JSON.stringify(this.formGroup.value));
     if (this.formGroup.controls["id"].value == 0){
       //inserta la consultorio
       this.datosservices.InsertTandas(this.tanda).subscribe(rep=>{
