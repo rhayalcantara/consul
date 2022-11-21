@@ -15,6 +15,9 @@
   <li class="nav-item">
     <a (click)="abrilformulario() " class="nav-link active">  Agregar</a>
   </li>
+  <li class="nav-item">
+    <a (click)="imprimir() " class="nav-link active">  Listado de Consultas por Fecha</a>
+  </li>  
 </ul>
 
 
@@ -58,13 +61,4 @@
   (page)="handlePage($event)"
   showFirstLastButtons=true>
 </mat-paginator>
-<!-- <pagination-controls (maxSize)="totalregistros"
-                     (directionLinks)="directionLinks"
-                     (autoHide)="autoHide"
-                     (responsive)="responsive"
-                     (previousLabel)="<"
-                     (nextLabel)=">"
-                     (screenReaderPaginationLabel)="paginacion"
-                     (screenReaderPageLabel)="paginacion1"
-                     (screenReaderCurrentLabel)="paginacion2"
-                     [pageChange]="onPageChange($event)"></pagination-controls>  -->
+

@@ -1,0 +1,36 @@
+
+<div class="card" >
+    
+    <div class="dropdown" >
+      <label  class="fw-semibold">{{titulo}}</label>
+        <button
+          
+          mat-button
+          [matMenuTriggerFor]="menu"
+          style="float: right;"
+        >          
+          <span class="iconify" data-icon="bx:dots-vertical"></span>
+        </button>
+        <mat-menu #menu="matMenu">
+         
+          <button mat-menu-item (click)="cambia('line')" >Line</button>
+          <button mat-menu-item (click)="cambia('bar')">Bar</button> 
+          <button mat-menu-item (click)="cambia('horizontalBar')" >HorizontalBar</button>
+          <button mat-menu-item (click)="cambia('radar')">Radar</button>  
+          <button mat-menu-item (click)="cambia('pie')">Pie</button>         
+        </mat-menu>
+      </div>
+      
+    <div class="card-body" >
+            <canvas id="chart" baseChart 
+                [datasets]="lineChartData" 
+                [labels]="lineChartLabels" 
+                [options]="lineChartOptions"
+                [colors]="lineChartColors" 
+                [legend]="lineChartLegend" 
+                [chartType]="lineChartType" 
+                [plugins]="lineChartPlugins">
+            </canvas>
+    </div>
+    
+</div>

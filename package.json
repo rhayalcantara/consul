@@ -24,8 +24,12 @@
     "@aspnet/signalr": "^1.0.27",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "bootstrap": "^4.5.0",
+    "chart.js": "^2.9.4",
+    "html2canvas": "^1.4.1",
+    "ng2-charts": "^2.4.3",
+    "pdfmake": "^0.2.5",
     "rxjs": "~6.6.0",
-    "sweetalert2": "^11.4.4",
+    "sweetalert2": "^11.6.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

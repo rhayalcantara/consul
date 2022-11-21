@@ -78,6 +78,10 @@ export class GturnosComponent implements OnInit {
     newFormControl2.setValue("");
     this.formGroup.addControl("nombres", newFormControl2);
 
+    let newFormControlrecord: FormControl = new FormControl();      
+    newFormControlrecord.setValue("");
+    this.formGroup.addControl("record", newFormControlrecord);
+
     let newFormControl3: FormControl = new FormControl();      
     newFormControl3.setValue("");
     this.formGroup.addControl("apellidos", newFormControl3);
@@ -108,6 +112,7 @@ export class GturnosComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.paciente =   result;
       this.turno.paciente_id = this.paciente.pacienteid;
+      this.formGroup.controls["record"].setValue(this.paciente.paciente.record);
       this.formGroup.controls["id"].setValue(this.paciente.pacienteid);
       this.formGroup.controls["nombres"].setValue(result.persona.nombres);
       this.formGroup.controls["apellidos"].setValue(result.persona.apellidos);

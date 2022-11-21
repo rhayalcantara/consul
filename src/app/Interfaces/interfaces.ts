@@ -101,6 +101,8 @@ export interface Consultasdts{
   record: String;
   peso:number;
   temperatura:number;
+  observacion:String;
+  historialclinico:String;
 }
 export interface Consultas{
   id: number;
@@ -146,6 +148,8 @@ export interface Consultas{
   record: String;
   peso:number;
   temperatura:number;
+  observacion:String;
+  historialclinico:String;
 }
 export interface Expediente{
   consulta: Consultas;
@@ -157,7 +161,14 @@ export interface Paciente{
   personaid: number;
   fechacreacion: Date;
   historial_clinico: string;
+  record: String;
 }
+export interface PersonaPaciente_ext extends Persona{
+  pacienteid: number;
+  fechacreacion: Date;
+  historial_clinico: string;
+}
+
 export interface PacientePersona{
    pacienteid: number;
    personaid: number;
@@ -199,6 +210,13 @@ export interface Doctor{
   especialiadid:number;
   fechacreacion: Date;
   statusid:number;
+}
+
+export interface PersonaDoctor_ext extends Persona{
+  doctor:Doctor;
+  especialialidad:Especialidades;
+  fechacreacion:Date;
+  status:Status;
 }
 
 export interface Doctordts{
@@ -260,13 +278,14 @@ export interface TurnoDTS {
   numero:number;
   paciente_id:number;
   valor:number;
+  cobrado:number;
   status:number;
   paciente:string; 
   doctor:string;   
   tanddescripcion:string; 
   doctorid:number;        
   statusdescripcion:string;
-
+  record:string;
 }
 
 export interface Roles{
@@ -327,4 +346,99 @@ export interface Menu {
   url: string;
   icon: string;
   text: string;
+}
+export interface PacienteSexoChart {
+  id: number;
+  sexo: string;
+  mes: string;
+  year: number;
+  cnt: number;
+}
+export interface PacientePersonaSexo {
+  id: number;
+  sexo: string;
+  cnt: number;
+}
+
+export interface PacientePersonaSexoTipoidentificacion {
+  id: number;
+  sexo: string;
+  tipoidentificacion: string;
+  cnt: number;
+  porciento: number;
+}
+export interface EntreFecha{
+  desde:string;
+  hasta:string;
+}
+
+export interface LCamposConsulta{
+  fecha:string;
+  especialidad: string;
+  doctor:string;
+  paciente:string;
+  dx:string;
+}
+export interface Presu_Odon{
+  id:number;
+  fecha: Date;
+  procedimiento:number;
+  valor:number;
+  consultaid:number;
+}
+export interface po extends Presu_Odon{
+  editando:boolean;
+  editado:boolean;
+}
+export interface fecha {
+  fecha:string;
+}
+
+export interface ConsultaDocSemanal {
+  id: number;
+  doc: string;
+  año: number;
+  descripcion: string;
+  promediosemanal: number;
+}
+
+export interface CartTitle {
+  Title:string;
+  data1:number;
+  data2:number;
+}
+
+export interface ConsultaDocSemanalAnos {
+  id: number;
+  ano: number;
+}
+
+export interface Persona_cf {
+  id: number
+  personaid: number
+  pacienteid: number
+  fecha: string
+  peso: string
+  talla: string
+  condicion_fisica: string
+  cafe: boolean
+  alcohol: boolean
+  tizana: boolean
+  atecedentespersonales: string
+  ninez: string
+  adolencencia: string
+  adultez: string
+  habitostoxico: string
+  antecedentesginocoobterico: string
+  antecedentesfamiliares: string
+  observacion: string
+}
+export interface Procedimiento{
+  id: number
+  descripcion: string
+  monto: number
+  especialiadid: number
+}
+export interface ProcedimientoDTS extends Procedimiento {
+  especialidad: string
 }

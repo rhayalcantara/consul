@@ -10,29 +10,34 @@
     
   </div>
     
-  <p *ngIf="!lt"><em>{{estado}}</em></p>
+  <p *ngIf="lt.length==0"><em>{{estado}}</em></p>
   
-  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="lt">
+  <table class='table table-striped' id='table' aria-labelledby="tableLabel" *ngIf="lt.length>0">
     <thead>
       <tr>
+        <th>Record</th>
         <th>Paciente</th>
         <th>Doctor</th>
         <th>Tanda</th>
         <th>Numero</th>
         <th>Status</th>
         <th>Valor</th>
+        <th>Opciones</th>
+        
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let lpturno of lt">
-        <td>{{lpturno.paciente }}</td>
+      <tr *ngFor="let lpturno of lt; let i = index" id="{{'statu'+i}}">
+        <td >{{lpturno.record }}</td>
+        <td >{{lpturno.paciente }}</td>
         <td>{{lpturno.doctor}}</td>
         <td>{{lpturno.tanddescripcion}}</td> 
         <td>{{lpturno.numero}}</td> 
-        <td>{{lpturno.statusdescripcion}}</td>
+        <td >{{lpturno.statusdescripcion}}</td>
         <td>{{lpturno.valor}}</td>  
          <td >
-          <button  class="btn btn-secondary" (click)="llamar2(lpturno);">LLamar a Consultorio</button>
+          <button  class="btn btn-secondary" (click)="llamar2(lpturno);" *ngIf="lpturno.status==16">LLamar a Consultorio</button>
+          <button  class="btn btn-secondary" (click)="llamar(lpturno);" *ngIf="lpturno.status==14 || lpturno.status==1016 ">Consultar</button>
       </td>
       </tr>
     </tbody>

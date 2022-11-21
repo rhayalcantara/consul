@@ -13,8 +13,7 @@ import { FormAgendaConsultorioComponent } from '../form-agenda-consultorio/form-
 export class ListAgendaConsultorioComponent implements OnInit {
 
   public totalregistros:number=0;
-  public config: any;
-  public labels: any;
+  public pageSize=5;
   public page:number=-1;
   public agendaconsultorio: AgendaConsultorio ={
     id:0,
@@ -31,9 +30,9 @@ export class ListAgendaConsultorioComponent implements OnInit {
   ngOnInit() {
     this.getdatos()
   }
-  onPageChange(event:any) {
-    this.config.currentPage = event;
-    this.page = event -1;
+  handlePage(event:any) {
+    console.log(event)
+    this.page = event.pageIndex;
     if (this.buscando){
       //esta buscando
       this.updatedatosfiltro(this.page,this.textobuscando);
@@ -55,11 +54,7 @@ export class ListAgendaConsultorioComponent implements OnInit {
         if (rep>0){
           // actualizar cantidad de datos en la paginacion
           this.totalregistros = rep;
-          this.config= {
-            itemsPerPage: 5,
-            currentPage: 1,
-            totalItems: rep
-          };
+      
           this.buscando=true;
           this.page=0;
            // mostrar los datos
@@ -78,18 +73,8 @@ export class ListAgendaConsultorioComponent implements OnInit {
     this.page=0;
     this.datos.GetAgendaConsultorioCount().subscribe(rep=>{
       this.totalregistros=rep;
-      this.config = {
-        itemsPerPage: 5,
-        currentPage: 1,
-        totalItems: rep
-      };
-      this.labels = {
-        previousLabel: "<",
-        nextLabel: ">",
-        screenReaderPaginationLabel: "paginacion",
-        screenReaderPageLabel: "paginacion1",
-        screenReaderCurrentLabel: "paginacion2"
-      }; 
+      
+      //this.labels = 
     });
     this.updatedatos(this.page);
   }
@@ -134,7 +119,7 @@ export class ListAgendaConsultorioComponent implements OnInit {
                                                                              agendaconsultoriodetalle:acds}});
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed',result);
-      this.onPageChange(1);
+      this.handlePage(1);
     }); 
   }
   abrirmodaledit(agendaconsultorio:AgendaConsultoriodts){
@@ -147,7 +132,7 @@ export class ListAgendaConsultorioComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed',result);
         console.log(this.page);
-        this.onPageChange(this.page+1);         
+        this.handlePage(this.page+1);         
       }); 
     });
 

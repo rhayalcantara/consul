@@ -1,0 +1,35 @@
+
+<div class="contact_form">
+
+  <div class="formulario">      
+    <h1>{{titulo}}</h1>
+      <h3>Escriba las fechas a buscar</h3>
+  
+  
+        <form novalidate  [formGroup]="formGroup">       
+  
+          
+              <p>
+                <label for="desde" class="colocar_nombre">Desde
+                  <span class="obligatorio">*</span>
+                </label>
+                  <input type="date" name="desde" id="desde" required="obligatorio" formControlName="desde" >
+              </p>
+            
+              <p>
+                <label for="hasta" class="colocar_email">Hasta
+                  <span class="obligatorio">*</span>
+                </label>
+                  <input type="date" name="hasta" id="hasta" required="obligatorio" formControlName="hasta">
+              </p>
+          
+       
+              <button type="submit" (click)="buscar()" name="enviar_formulario" id="enviar"><p>Buscar</p></button>
+  
+              <p class="aviso">
+                <span class="obligatorio"> * </span>los campos son obligatorios.
+              </p>          
+          
+        </form>
+  </div>  
+  </div>

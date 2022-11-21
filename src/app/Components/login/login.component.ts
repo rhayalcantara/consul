@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           return;
       }
 
-      this.loading = true;
+      
       
       var originalText  = this.f.password.value.trim();
       let authRequest:AuthRequest ={

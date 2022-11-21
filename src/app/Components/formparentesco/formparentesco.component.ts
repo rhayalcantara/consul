@@ -15,10 +15,11 @@ export class FormparentescoComponent implements OnInit {
   formGroup: FormGroup;
   parentesco: Parentesco=null!;
   campos:string[]=[];
-  constructor(      @Inject(MAT_DIALOG_DATA) public data:any,
-  private dialogRef: MatDialogRef<FormparentescoComponent>,
-  private fb: FormBuilder,
-  protected datosservices: DatosService) { 
+  constructor(  
+      @Inject(MAT_DIALOG_DATA) public data:any,
+      private dialogRef: MatDialogRef<FormparentescoComponent>,
+      private fb: FormBuilder,
+      protected datosservices: DatosService) { 
     this.formGroup=this.fb.group({});
   }
 

@@ -1,0 +1,54 @@
+<h1 id="tableLabel">Expedientes Anteriores del Paciente {{nombrepaciente}}</h1>
+
+<p>Listados de Expedientes Registrados:{{totalregistros}}</p>
+<div class="input-group">
+  <input class="form-control" type="text" 
+         placeholder="Search for..." 
+         aria-label="Search for..." 
+         aria-describedby="btnNavbarSearch" 
+         style="margin-bottom:5px; margin-left:-14px"
+         [(ngModel)]="term" 
+         (change)="buscar($event)"/>
+  
+</div>
+
+<p *ngIf="!consultas"><em>Cargando...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="consultas" width=100%>
+  <thead>
+    <tr>
+      <th width=10%>Record</th>
+      <th width=30%>Paciente</th>
+      <th width=20%>Fecha</th>
+      <th width=20%>Doctor</th> 
+      <th width=20%>Ver</th>
+      <!-- <th>Eliminar</th> -->
+    </tr>
+  </thead>
+</table>
+<div id="div1">
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="consultas" width=100%>
+
+  <tbody>
+    <tr *ngFor="let expediente of consultas ">
+      <td width=10%>{{ expediente.record }}</td>
+      <td width=30%>{{ expediente.pacientedts.persona.nombres}} {{expediente.pacientedts.persona.apellidos}} - {{expediente.pacientedts.persona.numero_identificacion}}</td>
+      <td width=20%>{{ expediente.fecha }}</td>
+      <td width=20%>{{ expediente.doctordts.persona.nombres}} {{ expediente.doctordts.persona.apellidos }} - {{ expediente.doctordts.especialidad.descripcion }} </td>
+   
+      <td width=20%>
+        <button class="btn btn-primary" (click)="abrirmodaledit(expediente);">Ver</button>
+      <!-- </td>
+      <td><button class="btn btn-danger" (click)=" delete(persona);">Eliminar</button></td> -->
+
+    </tr>
+  </tbody>
+</table>
+</div>
+<mat-paginator 
+  #paginator [length]="totalSize"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[2, 5, 10, 20]"
+  (page)="handlePage($event)"
+  showFirstLastButtons=true>
+</mat-paginator>

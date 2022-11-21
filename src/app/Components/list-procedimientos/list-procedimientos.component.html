@@ -1,0 +1,58 @@
+
+<h2>Mantenimiento Procedimientos Medicos</h2>
+<h3>Total de Registros {{totalSize}}</h3>
+<div class="my-3">
+<select class="form-control"  id="especialidadid"  [(ngModel)]="selectedDevice" (change)="getdatos()" >
+  <option value=0 selected="selected">Selecione una Especialidad</option>
+  <option  *ngFor="let especialidad of especialidades" [value]=especialidad.id >{{especialidad.descripcion}}</option>
+</select> 
+</div>
+<div class="my-3">
+<div class="input-group">
+    <input class="form-control" type="text" 
+           placeholder="Search for..." 
+           aria-label="Search for..." 
+           aria-describedby="btnNavbarSearch" 
+         
+           [(ngModel)]="term" 
+           (change)="getdatos()"/>
+    
+  </div>
+</div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a (click)="abrirmodal() " class="nav-link active">  Agregar</a>
+    </li>
+  </ul>
+  
+  <p *ngIf="!procedimientos"><em>Cargando...</em></p>
+  <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="procedimientos">
+    <thead>
+      <tr>
+        <th>Especialidad</th>
+        <th>Descripcion</th>        
+        <th>Precio</th>
+        <th>Opcion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let procedimiento of procedimientos ">
+        <td>{{ procedimiento.especialidad }}</td>
+        <td>{{ procedimiento.descripcion}}</td>
+        <td>{{ procedimiento.monto}}</td>
+        <td>
+            <button class="btn btn-primary" (click)="abrirmodaledit(procedimiento);">Editar</button>
+        </td>
+        <!-- <td><button class="btn btn-danger" (click)=" eliminar(procedimiento);">Eliminar</button></td> -->
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+  <mat-paginator #paginator [length]="totalSize"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[2, 5, 10, 20]"
+  (page)="handlePage($event)"
+  showFirstLastButtons=true>
+</mat-paginator>

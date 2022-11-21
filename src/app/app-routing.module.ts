@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormulariopersonaComponent } from './Components/formulariopersona/formulariopersona.component';
 import { ListAgendaConsultorioComponent } from './Components/list-agenda-consultorio/list-agenda-consultorio.component';
+import { ListProcedimientosComponent } from './Components/list-procedimientos/list-procedimientos.component';
 import { ListaturnospacientesComponent } from './Components/listaturnospacientes/listaturnospacientes.component';
 import { ListaturnostvComponent } from './Components/listaturnostv/listaturnostv.component';
 import { ListcajaComponent } from './Components/listcaja/listcaja.component';
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'Users', component: ListusersComponent, canActivate: [AuthGuard] },
   { path: 'Home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'Lturnos', component: LTurnosComponent, canActivate: [AuthGuard]},
+  { path: 'proced', component:ListProcedimientosComponent, canActivate: [AuthGuard]}
   
 ];
 

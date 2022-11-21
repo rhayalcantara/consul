@@ -50,12 +50,14 @@ export class ListaturnostvComponent implements OnInit {
           numero:this.turno.numero,
           paciente_id:0,
           valor:0,
+          cobrado:0,
           status:this.turno.status,
           paciente:'', 
           doctor:'',   
           tanddescripcion:'', 
           doctorid:0,        
-          statusdescripcion:''
+          statusdescripcion:'',
+          record: ''
         }   
         console.log('lt',lpturno);
 
@@ -83,12 +85,15 @@ export class ListaturnostvComponent implements OnInit {
         numero:this.turno.numero,
         paciente_id:0,
         valor:0,
+        cobrado:0,
         status:this.turno.status,
         paciente:'', 
         doctor:'',   
         tanddescripcion:'', 
         doctorid:0,        
-        statusdescripcion:''
+        statusdescripcion:'',
+        record:''
+
       }   
       this.getagendaconsultorio(lpturno,false);
       console.log('lp tranformado',lpturno);

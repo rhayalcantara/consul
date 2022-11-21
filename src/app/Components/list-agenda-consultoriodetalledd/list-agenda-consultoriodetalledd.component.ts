@@ -45,8 +45,8 @@ export class ListAgendaConsultoriodetalleddComponent implements OnInit {
       // let camp:string[]=[];
       // camp = Object.keys(result);
       // let i:AgendaConsultoriodetalle = this.agendaconsultoriosdetalle.find(x => x.diasemana == result.diasemana);
-      // var index:number = this.agendaconsultoriosdetalle.indexOf(this.agendaconsultoriosdetalle.find(x => x.diasemana == result.diasemana));
-      // this.agendaconsultoriosdetalle[index]
+       var index:number = this.agendaconsultoriosdetalle.indexOf(acd);    
+       this.agendaconsultoriosdetalle[index]=result
       // for (let control of camp) {
       //   this.agendaconsultoriosdetalle[index][control]=result[control]        
       // }

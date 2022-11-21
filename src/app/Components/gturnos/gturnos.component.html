@@ -13,6 +13,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label >Paciente</label>
+                       
                     </div> 
                     <div class="form-group col-md-4">
                         <a class="btn btn-primary" (click)="abribusquedapaciente()"> Buscar Paciente</a> 
@@ -20,6 +21,10 @@
                 </div>
               </div> 
               <div class="form-group ">
+
+                <label >Record</label>                
+                <input type="text" class="form-control" id="record" formControlName="record" readonly/>
+
                 <label >Nombres</label>
                 <input type="text" class="form-control" id="id" formControlName="id" required style="display: none;"/>
                 <input type="text" class="form-control" id="nombres" formControlName="nombres" readonly/>

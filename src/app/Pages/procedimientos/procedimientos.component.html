@@ -1,0 +1,39 @@
+<h2>Agregar un Procedimeinto</h2>
+<div style="background-color: rgb(116, 199, 224);">
+  <form novalidate (ngSubmit)=" grabar();" [formGroup]="formGroup">
+    <!-- <div class="card card-bordered style-primary"> -->
+      <div class="card-head">
+        <header></header>
+      </div>
+      <div class="card-body style-default-bright">
+        <div class="form-row">
+          <div class="form-group ">
+            <label for="descripcion">Descripcion</label>
+            <input type="text" class="form-control" id="descripcion" required formControlName="descripcion" />
+          </div>
+          <div class="form-group ">
+            <label for="monto">Valor</label>
+            <input type="text" class="form-control" id="monto" required formControlName="monto" />
+          </div>  
+          <div class="form-group ">
+            <label for="especialiadid">Especialidad</label>
+            <select class="form-control" formControlName="especialiadid" id="especialiadid">
+                <option *ngFor="let p of especialidades" [value]="p.id"> {{p.descripcion}} </option>          
+            </select>
+        </div>
+        </div>
+        </div>  
+      <!-- <div class="card-actionbar style-default-bright"> -->
+        <div class="card-actionbar-row">
+          <button class="btn ink-reaction btn-raised btn-primary" type="submit" style="float:right;"
+            [disabled]="!formGroup.valid">Grabar</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <a mat-dialog-close style="float: right; margin-right: 5px;" (click)="cancelar()" class="btn ink-reaction btn-raised btn-danger">Cancelar</a>
+        </div>
+        <br/>
+      <!-- </div> -->
+    <!-- </div> -->
+  </form>
+</div>
+<mat-dialog-actions>
+</mat-dialog-actions>

@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -64,6 +65,28 @@ import { StatusComponent } from './Pages/status/status.component';
 import { LpersonasComponent } from './Pages/personas/lpersonas.component';
 import { SearchFilterPipe } from './Pipes/search-filter.pipe';
 import { LTurnosComponent } from './Pages/lturnos/lturnos.component';
+import { ListaExpedientePacienteComponent } from './Components/lista-expediente-paciente/lista-expediente-paciente.component';
+import { ChartsModule } from 'ng2-charts';
+import { CardComponent } from './Components/card/card.component';
+import { ChartComponent } from './Components/chart/chart.component';
+import { HomeDocComponent } from './Pages/home-doc/home-doc.component';
+import { FormBuscarComponent } from './Components/form-buscar/form-buscar.component';
+import { VisorpdfComponent } from './Components/visorpdf/visorpdf.component';
+import pdfMake from "pdfmake/build/pdfmake";  
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import { FormBuscarFechaComponent } from './Components/form-buscar-fecha/form-buscar-fecha.component';
+import { LoadingComponent } from './Components/loading/loading.component';
+import { DocpacComponent } from './Components/docpac/docpac.component';
+import { HelperService } from './Services/HelpService';
+import { CargosAtrazoComponent } from './Pages/cargos-atrazo/cargos-atrazo.component';
+import { ReporteService } from './Services/Reportes';
+import { FormAntecedentePersonalesComponent } from './Components/form-antecedente-personales/form-antecedente-personales.component';
+import { ListAntecedentePersonalesComponent } from './Components/list-antecedente-personales/list-antecedente-personales.component';
+import { ProcedimientosComponent } from './Pages/procedimientos/procedimientos.component';
+import { FormprocedimientosComponent } from './Components/formprocedimientos/formprocedimientos.component';
+import { ListProcedimientosComponent } from './Components/list-procedimientos/list-procedimientos.component';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs; 
 
 @NgModule({
   declarations: [
@@ -113,7 +136,22 @@ import { LTurnosComponent } from './Pages/lturnos/lturnos.component';
     ListaturnospacientesComponent,
     SearchFilterPipe,
     LoginComponent,
-    LTurnosComponent
+    LTurnosComponent,
+    ListaExpedientePacienteComponent,
+    CardComponent,
+    ChartComponent,
+    HomeDocComponent,
+    FormBuscarComponent,
+    VisorpdfComponent,
+    FormBuscarFechaComponent,
+    LoadingComponent,
+    DocpacComponent,
+    CargosAtrazoComponent,
+    FormAntecedentePersonalesComponent,
+    ListAntecedentePersonalesComponent,
+    ProcedimientosComponent,
+    FormprocedimientosComponent,
+    ListProcedimientosComponent
   ],
   entryComponents:[LoginComponent,FormularioConsultaComponent,
     BuscarpersonaComponent,FormpersonaComponent,
@@ -124,7 +162,8 @@ import { LTurnosComponent } from './Pages/lturnos/lturnos.component';
     FormTandaComponent,FormAgendaConsultorioComponent,
     FormDetalleTandaConsultorioComponent,GturnosComponent,
     ListaturnospacientesComponent,FormCobroConsultaComponent,
-    FormRolComponent,FormUserComponent],
+    FormRolComponent,FormUserComponent,VisorpdfComponent,FormBuscarFechaComponent,
+    LoadingComponent,FormAntecedentePersonalesComponent,ListProcedimientosComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -138,14 +177,16 @@ import { LTurnosComponent } from './Pages/lturnos/lturnos.component';
     MatDialogModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    FormsModule
+    MatMenuModule,
+    FormsModule,
+    ChartsModule
   ],
   exports: [
     MatButtonModule,
     MatToolbarModule,
     MatIconModule
  ],
-  providers: [  DatosService,NgbModal,
+  providers: [  DatosService,HelperService,NgbModal,ReporteService,
     { provide: HTTP_INTERCEPTORS,useClass: JwtInterceptor,multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent]

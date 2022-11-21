@@ -16,7 +16,8 @@ export class BuscarpacientesComponent implements OnInit {
     id: 0,
     personaid:0,          
     fechacreacion: new Date(),
-    historial_clinico:""
+    historial_clinico:"",
+    record: ""
   };
   public loading:boolean = false;
   private persona:Persona ={

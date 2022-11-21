@@ -20,6 +20,7 @@
   <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="pacientepersonas"  width=100%>
     <thead>
       <tr>
+        <th width=20%>Record</th>
         <th width=20%>Nombres</th>
         <th width=20%>Apellidos(C)</th>
         <th width=20%>numero_identificacion</th>
@@ -34,6 +35,7 @@
 
     <tbody>
       <tr *ngFor="let paciente of pacientepersonas   ">
+        <td width=20%>{{ paciente.paciente.record }}</td>
         <td width=20%>{{ paciente.persona.nombres }}</td>
         <td width=20%>{{ paciente.persona.apellidos }}</td>
         <td width=20%>{{ paciente.persona.numero_identificacion}}</td>

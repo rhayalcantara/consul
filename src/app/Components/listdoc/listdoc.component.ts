@@ -1,7 +1,9 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Documento } from 'src/app/Interfaces/interfaces';
 import { DatosService } from 'src/app/Services/datos.service';
+import { VisorpdfComponent } from '../visorpdf/visorpdf.component';
 
 
 @Component({
@@ -13,7 +15,7 @@ export class ListdocComponent implements OnInit {
   public ruta:string="";
   public Documentos:Documento[]=[];
   public term:string="";
-  constructor(private tool:DatosService) {
+  constructor(private tool:DatosService,private toastr: MatDialog) {
   
    }
   @Input("cod") cod:number = 0;
@@ -41,15 +43,25 @@ export class ListdocComponent implements OnInit {
   private downloadFile(data:any,doc:any) {
     const downloadedFile = data;
     console.log(downloadedFile);
-    const a = document.createElement('a');
-    a.setAttribute('style', 'display:none;');
-    document.body.appendChild(a);
+   // const a = document.createElement('a');
+   // a.setAttribute('style', 'display:none;');
+   // document.body.appendChild(a);
    // a.download = doc.ruta;
-    a.href = URL.createObjectURL(downloadedFile);
-    this.ruta = a.href
+   // a.href = URL.createObjectURL(downloadedFile);
+   // this.ruta = a.href
+    /*
+    const targetElement = document.querySelector('#iframeContainer');
+    const iframe = document.createElement('iframe');
+    iframe.src = URL.createObjectURL(downloadedFile);
+    targetElement.appendChild(iframe);
+   */
+    const dialogRef = this.toastr.open(VisorpdfComponent,{width:"85%" ,height:"70%" ,data:{url:URL.createObjectURL(downloadedFile)}});
+
+  /*
     a.target = '_blank';
     a.click();
     document.body.removeChild(a);
+    */
 }
 
   getdocs(){

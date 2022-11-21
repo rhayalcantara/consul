@@ -41,29 +41,33 @@ export class NavMenuComponent implements OnInit {
     private datos:DatosService,
     private router: Router
     ) { 
-      this.datos.usuario.subscribe(rep =>{
-        console.log(rep);
-        if (rep.menuhome != null){
-          this.usuario = rep;
-          this.navMenus=this.usuario.menues
-          this.mostrarmenu=true;
-          console.log(this.navMenus)
-          this.datos.GetUsername(this.usuario.username).subscribe((user) =>{
-          
-            this.userdts = user; 
-            //this.consiguemenu(this.userdts.id.toString())
-            
-         
-        });          
-        }         
-        else{
-          this.userdts.persona='';
-          this.userdts.rol='';
-          this.navMenus=[];
+      this.datos.usuario.subscribe(
+        { next:
+          (rep) =>{
+            console.log('Cambio de usuario',rep)
+            if (rep){
+              this.usuario = rep;
+              this.navMenus=this.usuario.menues
+              this.mostrarmenu=true;
+              this.datos.GetUsername(this.usuario.username).subscribe((user) =>{     
+                console.log('user',user)         
+                this.userdts = user; 
+                this.sidenav.close(); 
+                this.sidenav.mode='over';                                            
+               });          
+            }         
+            else{
+              this.userdts.persona='';
+              this.userdts.rol='';
+              this.navMenus=[];
+            }
+     
+    
+          },error:(err:Error)=> {
+            this.datos.showMessage("Error: "+err.message,"Error Cargando Menues","error")
+          }
         }
- 
-
-      });
+  );
   }
   ngOnInit(): void {
 
@@ -84,7 +88,10 @@ export class NavMenuComponent implements OnInit {
       this.sidenav.mode='over';
       } 
   cerrarmenu(){
+   
     this.sidenav.close();
+      
+    
   }
       
   logout(){
@@ -95,7 +102,7 @@ export class NavMenuComponent implements OnInit {
    this.userdts.rol='';
    this.sidenav.mode='side';
     this.datos.logout();
-    this.router.navigateByUrl('inicio');
+    this.router.navigateByUrl('/');
     //window.location.reload();
 
    
@@ -106,7 +113,7 @@ login() {
   this.sidenav.mode='over';
   this.cerrarmenu();
  
-  this.router.navigateByUrl('inicio');
+  this.router.navigateByUrl('/');
   
   window.location.reload();
 }

@@ -51,6 +51,12 @@ export class FormpersonaComponent implements OnInit {
       case "Paciente":
         this.paciente= this.data.paciente;
         this.persona = this.data.persona;
+        if (this.paciente.record == null){
+          this.paciente.record="";
+        }
+        let newFormControl2: FormControl = new FormControl();      
+        newFormControl2.setValue(this.paciente.record);
+        this.formGroup.addControl("record", newFormControl2);        
         break;
       case "Pariente":
         this.pariente = this.data.pariente;
@@ -59,6 +65,7 @@ export class FormpersonaComponent implements OnInit {
         let newFormControl: FormControl = new FormControl();      
         newFormControl.setValue(this.pariente.parentescoid);
         this.formGroup.addControl("parentescoid", newFormControl);
+
         break;
         case "Doctor":
           this.doctor = this.data.doctor;
@@ -85,7 +92,7 @@ export class FormpersonaComponent implements OnInit {
     })
     //optiene las propidades del objeto
     this.campos=Object.keys(this.persona);
-
+   
     this.actualizadatodform();
 
   }
@@ -112,12 +119,13 @@ actualizadatodform(){
     //   }
       
     // }
-    this.persona = JSON.parse(JSON.stringify(this.formGroup.controls));
+    this.persona = JSON.parse(JSON.stringify(this.formGroup.value));
+    
     
     if (this.formGroup.controls["id"].value == 0){
       //inserta la persona
       this.datosservices.Insertpersona(this.persona).subscribe(rep=>{
-        console.log('grabado',rep);
+        
         this.persona=rep;
         this.casosrol("insert");
       });
@@ -142,16 +150,21 @@ casosrol(accion:string){
               id: 0,
               personaid:this.persona.id,          
               fechacreacion: new Date(),
-              historial_clinico:""
+              historial_clinico:"",
+              record: this.formGroup.controls["record"].value
             }
-            console.log('Insertando',paciente);
             this.datosservices.Insertpaciente(paciente).subscribe(rep =>{
-              console.log('grabando',rep);
               this.datosservices.showMessage("Grabado","Agregando Paciente","success");
               this.dialogRef.close(rep);
             });    
         }else{
+          this.paciente.record = this.formGroup.controls["record"].value;
+          console.log("el paciente:",this.paciente)
           
+          this.datosservices.UpdatepPaciente(this.paciente).subscribe(rep =>{
+            this.datosservices.showMessage("Grabado","Agregando Paciente","success");
+            this.dialogRef.close(rep);
+          })
           this.datosservices.showMessage("Actualizado","Actualizando Paciente","success")
         }          
       break;

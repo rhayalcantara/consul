@@ -1,0 +1,41 @@
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1 solid #2e77c0;
+    border-radius: 0.5rem;
+  
+    padding-top: 16px; 
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.align-items-start {
+    align-items: center !important;
+    justify-items: center!important;
+}
+.justify-content-between {
+    justify-content: space-between !important;
+}
+.d-flex {
+    display: flex !important;
+}
+.card-title {
+    margin-bottom: 0.875rem;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+.fw-semibold {
+    font-weight: 600 !important;
+}
+.mb-1 {
+    margin-bottom: 0.25rem !important;
+}
+.d-block {
+    display: block !important;
+}

@@ -2,9 +2,12 @@ import {  HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/commo
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AgendaConsultorio, AgendaConsultoriodetalle, AgendaConsultoriodts, 
-         AuthRequest, Barrios, Consultas, Consultasdts, Consultorio, Doctor, 
-         Doctordts, Documento, Especialidades, Lturno, Menu, Paciente, PacientePersona, 
-         Parentesco, Persona, Personaparentesco, Personaparentescodts, Response, Roles, 
+         AuthRequest, Barrios, ConsultaDocSemanal, ConsultaDocSemanalAnos, Consultas, Consultasdts, Consultorio, Doctor, 
+         Doctordts, Documento, EntreFecha, Especialidades, fecha, Lturno, Menu, Paciente, PacientePersona, 
+         PacientePersonaSexo, 
+         PacientePersonaSexoTipoidentificacion, 
+         PacienteSexoChart, 
+         Parentesco, Persona, Personaparentesco, Personaparentescodts, Persona_cf, Presu_Odon, Procedimiento, ProcedimientoDTS, Response, Roles, 
          RolesMenu, Status, Tanda, Turno, TurnoDTS, User, UserDTS, Usuario } from '../Interfaces/interfaces';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2'
@@ -17,15 +20,23 @@ export class DatosService {
 
 
  
- 
-  //public url_root: string = "http://192.168.0.10:9095/";
-  public url_root:string = "https://localhost:5001/"
-  //public url_root:string = "http://rhayalcantara-001-site2.ftempurl.com/"
+ // public Url:       string = "http://rhayalcantara-001-site2.ftempurl.com/api/";
+  //public url_root:  string = "http://192.168.0.10:9095/";
+//  public url_root:  string = "https://localhost:5001/"
+ public url_root:string = "http://rhayalcantara-001-site2.ftempurl.com/"
+  public url_rootx:string = "http://rhayalcantara-001-site3.ftempurl.com/"
    public Url: string = this.url_root+"api/";
-  // public Url: string = "http://rhayalcantara-001-site2.ftempurl.com/api/";
+  
     public get urlserver(): string {
       return this.url_root;
     } 
+    public get urlserverx(): string {
+      return this.url_rootx;
+    } 
+    
+    public get Url_api():string{
+      return this.Url;
+    }
   private usuarioSubject:BehaviorSubject<Usuario>;
 
   public usuario : Observable<Usuario>;
@@ -36,12 +47,12 @@ export class DatosService {
   
   constructor(
      private http: HttpClient,
-    private toastr: MatDialog
+     private toastr: MatDialog
     //,
    
   ) {
     
-    this.usuarioSubject = new BehaviorSubject<Usuario>(JSON.parse(localStorage.getItem('usuario')|| '{}'));
+    this.usuarioSubject = new BehaviorSubject<Usuario>(JSON.parse(localStorage.getItem('usuario')|| null));
     this.usuario = this.usuarioSubject.asObservable();
   }
 
@@ -124,9 +135,10 @@ export class DatosService {
     return this.http.post<Response>(this.Url + `Users/login`,JSON.stringify(authRequest), { headers })
     .pipe(
       map((res: Response) =>{
-        console.log('regreso')
+
           if (res.exito === 1){
             const usuario: Usuario = res.data;
+            console.log('El usuariosa',usuario)
             localStorage.setItem('usuario',JSON.stringify(usuario));
             this.usuarioSubject.next(usuario);
           }
@@ -187,7 +199,7 @@ public GetAgendaConsultorios(page:number): Observable<AgendaConsultoriodts[]> {
   return this.http.get<AgendaConsultoriodts[]>(this.Url + `Agenda_Consultorio?page=${page}&pagesize=5`);
 }
 public GetAgendaConsultoriofiltro(page:number,texto:string): Observable<AgendaConsultoriodts[]> {
-  return this.http.get<AgendaConsultoriodts[]>(this.Url + `Agenda_Consultorio/filtro?page=${page}&pagesize=5&filtro=${texto}`);
+  return this.http.get<AgendaConsultoriodts[]>(this.Url + `Agenda_Consultorio/dts?page=${page}&pagesize=5&filtro=${texto}`);
 }
 
 public GetAgendaConsultorio(id:number):Observable<AgendaConsultoriodts>{
@@ -251,14 +263,15 @@ public insertTurno(obj:Turno):Observable<Turno>{
   return this.http.post<Turno>(this.Url + 'turnos', JSON.stringify(obj), { headers } );
 
 }
-public UpdateTurno(obj: Turno){
+public UpdateTurno(obj: Turno): Observable<Turno>{
   
   var headers = new HttpHeaders({
     'Content-Type': 'application/json; charset=utf-8'
   });
 
-  return this.http.put(this.Url + `Turnos/${obj.id}`, JSON.stringify(obj), { headers });
+  return this.http.put<Turno>(this.Url + `Turnos/${obj.id}`, JSON.stringify(obj), { headers });
 }  
+
 
 //Archivos 
 public Uploadfile(file: File,cod:number,identificador:string): Observable<HttpEvent<any>>{
@@ -337,19 +350,33 @@ public UpdateConsultorio(obj: Consultorio){
 
   return this.http.put(this.Url + `Consultorios/${obj.id}`, JSON.stringify(obj), { headers });
 }
+//consulta paciente 
+public GetConsultascuentapaciente(id:number): Observable<number> {
+
+  return this.http.get<number>(this.Url + `Paciente_Consulta/cuentapaciente/${id}`);
+}
+public GetConsultascuentafiltropaciente(texto:string,id:number): Observable<number> {
+  return this.http.get<number>(this.Url + `Paciente_Consulta/cuentafiltropaciente?filtro=${texto}&id=${id}`);
+}
+public GetConsultasdtspaciente(page:number,pagesize:number,id:number): Observable<Consultasdts[]> {
+  return this.http.get<Consultasdts[]>(this.Url + `Paciente_Consulta/dtspaciente?page=${page}&pagesize=${pagesize}&id=${id}`);
+}
+public GetConsultasdtsfiltropaciente(page:number,pagesize:number,texto:string,id:number): Observable<Consultasdts[]> {
+  return this.http.get<Consultasdts[]>(this.Url + `Paciente_Consulta/filtropaciente?page=${page}&pagesize=${pagesize}&filtro=${texto}&id=${id}`);
+}
 
 //Consultas
-public GetConsultascuenta(): Observable<number> {
-  return this.http.get<number>(this.Url + 'Paciente_Consulta/cuenta');
+public GetConsultascuenta(doc:number): Observable<number> {
+  return this.http.get<number>(this.Url + `Paciente_Consulta/cuentadocsolo?doc=${doc}`);
 }
-public GetConsultascuentafiltro(texto:string): Observable<number> {
-  return this.http.get<number>(this.Url + `Paciente_Consulta/cuentafiltro?filtro=${texto}`);
+public GetConsultascuentafiltro(texto:string,doc:number): Observable<number> {
+  return this.http.get<number>(this.Url + `Paciente_Consulta/cuentafiltrodoc?filtro=${texto}&doc=${doc}`);
 }
-public GetConsultasdts(page:number,pagesize:number): Observable<Consultasdts[]> {
-  return this.http.get<Consultasdts[]>(this.Url + `Paciente_Consulta/dts?page=${page}&pagesize=${pagesize}`);
+public GetConsultasdts(page:number,pagesize:number,doc:number): Observable<Consultasdts[]> {
+  return this.http.get<Consultasdts[]>(this.Url + `Paciente_Consulta/dts?page=${page}&pagesize=${pagesize}&doc=${doc}`);
 }
-public GetConsultasdtsfiltro(page:number,pagesize:number,texto:string): Observable<Consultasdts[]> {
-  return this.http.get<Consultasdts[]>(this.Url + `Paciente_Consulta/filtro?page=${page}&pagesize=${pagesize}&filtro=${texto}`);
+public GetConsultasdtsfiltro(page:number,pagesize:number,texto:string,doc:number): Observable<Consultasdts[]> {
+  return this.http.get<Consultasdts[]>(this.Url + `Paciente_Consulta/filtrodoc?page=${page}&pagesize=${pagesize}&filtro=${texto}&doc=${doc}`);
 }
 public GetConsultas(): Observable<Consultas[]> {
   return this.http.get<Consultas[]>(this.Url + 'Paciente_Consulta');
@@ -358,14 +385,14 @@ public InsertConsulta(obj: Consultas): Observable<Consultas> {
   var headers = new HttpHeaders({
     'Content-Type': 'application/json; charset=utf-8'
   });
-
+  
   return this.http.post<Consultas>(this.Url + 'Paciente_Consulta', JSON.stringify(obj), { headers } );
 }
 public UpdateConsulta(obj: Consultas){
   var headers = new HttpHeaders({
     'Content-Type': 'application/json; charset=utf-8'
   });
-
+  console.log(this.Url,obj)
   return this.http.put(this.Url + `Paciente_Consulta/${obj.id}`, JSON.stringify(obj), { headers });
 }
 
@@ -499,12 +526,12 @@ public Deleteespecialidad(obj: Especialidades): Observable<Especialidades> {
       return this.http.post<Persona>(this.Url + 'personas', JSON.stringify(obj), { headers } );
     }
   
-    public Updatepersona(obj: Persona){
+    public Updatepersona(obj: Persona): Observable<Persona>{
       var headers = new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8'
       });
       
-      return this.http.put(this.Url + `personas/${obj.id}`, JSON.stringify(obj), { headers });
+      return this.http.put<Persona>(this.Url + `personas/${obj.id}`, JSON.stringify(obj), { headers });
     }
   
     public Deletepersona(obj: Persona): Observable<Persona> {
@@ -513,6 +540,11 @@ public Deleteespecialidad(obj: Especialidades): Observable<Especialidades> {
     }
 
     //Pacientes
+
+    public GetPacientessexochart(): Observable<PacienteSexoChart[]> {
+      return this.http.get<PacienteSexoChart[]>(this.Url + 'pacientes/pacientesexochart');
+    }
+
     public GetPacientes(): Observable<Paciente[]> {
       return this.http.get<Paciente[]>(this.Url + 'pacientes');
     }
@@ -527,6 +559,7 @@ public Deleteespecialidad(obj: Especialidades): Observable<Especialidades> {
       return this.http.post<Paciente>(this.Url + 'Pacientes', JSON.stringify(obj), { headers } );
     }    
     public UpdatepPaciente(obj: Paciente){
+      console.log("el paci",obj);
       var headers = new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8'
       });
@@ -554,9 +587,30 @@ public Deleteespecialidad(obj: Especialidades): Observable<Especialidades> {
       return this.http.get<PacientePersona[]>(this.Url + `PacientePersonas/filtro?page=${page}&pagesize=${pagesize}&filtro=${texto}`);
     }
 
+    public GetPacientePersonasp():Observable<PacientePersonaSexo[]>{
+      return this.http.get<PacientePersonaSexo[]>(this.Url + `PacientePersonas/pt`);
+    }  
+    public GetPacientePersonasis():Observable<PacientePersonaSexoTipoidentificacion[]>{
+      return this.http.get<PacientePersonaSexoTipoidentificacion[]>(this.Url + `PacientePersonas/identificacionsexo`);
+    } 
     public GetPacientePersona(id:number):Observable<PacientePersona>{
       return this.http.get<PacientePersona>(this.Url + `PacientePersonas/${id}`);
     }  
+    public GetPersonacf(pacienteid:number):Observable<Persona_cf[]>{
+      return this.http.get<Persona_cf[]>(this.Url + `Persona_cf/paciente?id=${pacienteid.toString()}`);
+    }  
+    public AddPersonacf(pcf:Persona_cf): Observable<Persona_cf>{
+      var headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8'
+      });
+      return this.http.post<Persona_cf>(this.Url + `Persona_cf`, JSON.stringify(pcf), { headers } );
+    }
+    public updatePersonacf(pcf:Persona_cf): Observable<Persona_cf>{
+      var headers = new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8'
+      });
+      return this.http.put<Persona_cf>(this.Url + `Persona_cf/${pcf.id}`,JSON.stringify(pcf), { headers } );
+    }
 
     //tipo identificacion
     public GetTipoIdentificacion(): Observable<Status[]> {
@@ -619,6 +673,69 @@ public Deleteespecialidad(obj: Especialidades): Observable<Especialidades> {
   //Barrios
   public GetBarrios(): Observable<Barrios[]> {
     return this.http.get<Barrios[]>(this.Url + 'Barrios');
+  }
+  public GetConsultasdtsFechas(entrefecha:EntreFecha): Observable<Consultasdts[]>{
+    return this.http.get<Consultasdts[]>(this.Url +`Paciente_Consulta/entrefecha?desde=${entrefecha.desde}&hasta=${entrefecha.hasta}`);
+  }
+  public setPreOdon(preOdon:Presu_Odon[]): Observable<Presu_Odon[]>{
+    var headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8'
+    });
+    return this.http.post<Presu_Odon[]>(this.Url +'Presu_Odon/lote', JSON.stringify(preOdon), { headers })
+  }
+  public GetPreodonConsulta(id:string): Observable<Presu_Odon[]>{
+    console.log(this.Url +`Presu_Odon/consutaid?id=${id}`)
+    return this.http.get<Presu_Odon[]>(this.Url +`Presu_Odon/consultaid?id=${id}`);
+  }
+  public delPreondonConsulta(preOdon:Presu_Odon): Observable<Presu_Odon>{
+    return this.http.delete<Presu_Odon>(this.Url +`Presu_Odon/${preOdon.id}`)
+     
+  }
+  public getestaditicacsd(ano:string): Observable<ConsultaDocSemanal[]>{
+  
+    return this.http.get<ConsultaDocSemanal[]>(this.Url +`Estadisticas/csd/${ano}`)
+  }
+  public getestaditicaanos(): Observable<ConsultaDocSemanalAnos[]>{
+  
+    return this.http.get<ConsultaDocSemanalAnos[]>(this.Url +`Estadisticas/anos`)
+  }
+  
+  // Procedimientos
+  public GetProcedimientosCuenta(): Observable<number>{
+    return this.http.get<number>(this.Url +'Procedimientos/cuenta')
+  }
+  public GetProcedimientox(): Observable<ProcedimientoDTS[]> {
+    return this.http.get<ProcedimientoDTS[]>(this.Url + `Procedimientos`);
+  }
+  public GetProcedimientos(page:number,pagesize:number,filtro:string,id:number): Observable<ProcedimientoDTS[]> {
+
+    return this.http.get<ProcedimientoDTS[]>(this.Url + `Procedimientos/filtros?page=${page}&pagesize=${pagesize}&filtro=${filtro}&id=${id}`);
+  }
+  public GetProcedimiento(id:number): Observable<Procedimiento> {
+    return this.http.get<Procedimiento>(this.Url + `Procedimientos/${id}`);
+  }
+  public GetProcedimientosbyespecialidad(id:number): Observable<Procedimiento[]> {
+    return this.http.get<Procedimiento[]>(this.Url + `Procedimientos/especialidad&especiadadid=${id}`);
+  }
+  public InsertProcedimiento(obj: Procedimiento): Observable<Procedimiento> {
+    var headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8'
+    });
+
+    return this.http.post<Procedimiento>(this.Url + 'Procedimientos', JSON.stringify(obj), { headers } );
+  }
+
+  public UpdateProcedimiento(obj: Procedimiento){
+    var headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8'
+    });
+
+    return this.http.put(this.Url + `Procedimientos/${obj.id}`, JSON.stringify(obj), { headers });
+  }
+
+  public DeleteProcedimiento(obj: Status): Observable<Procedimiento> {
+
+    return this.http.delete<Procedimiento>(this.Url + `Procedimientos/${obj.id}`);
   }
 
 

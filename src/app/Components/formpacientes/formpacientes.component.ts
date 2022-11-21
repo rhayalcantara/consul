@@ -24,7 +24,8 @@ export class FormpacientesComponent implements OnInit {
     id: 0,
     personaid:0,          
     fechacreacion: new Date(),
-    historial_clinico:""
+    historial_clinico:"",
+    record:""
   };
   public persona:Persona ={
     id:0,
@@ -153,7 +154,7 @@ export class FormpacientesComponent implements OnInit {
 
 }
   abrilformularioeditar(paciente:PacientePersona){
-    const dialogRef = this.toastr.open(FormpersonaComponent,{data:{persona: paciente.persona,paciente:paciente.persona,rol:'Paciente'}}  );
+    const dialogRef = this.toastr.open(FormpersonaComponent,{data:{persona: paciente.persona,paciente:paciente.paciente,rol:'Paciente'}}  );
      
     dialogRef.afterClosed().subscribe(result => {
        

@@ -22,9 +22,10 @@ export class InicioComponent implements OnInit {
   }
   
   ngAfterViewInit() {
-     this.usuario = this.datos.usuarioData;
     
-    if (this.usuario.menuhome!=null) {
+     this.usuario = this.datos.usuarioData;
+   
+    if (this.usuario) {
  
       this.activamenu();
       
@@ -32,8 +33,9 @@ export class InicioComponent implements OnInit {
 
        const dialogRef = this.toastr.open(LoginComponent,{disableClose:true });
       
-      dialogRef.afterClosed().subscribe((result) => {
+       dialogRef.afterClosed().subscribe((result) => {
         this.usuario = this.datos.usuarioData;
+        
         this.activamenu();
        
         });
