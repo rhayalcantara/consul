@@ -4,6 +4,7 @@ import { Consultas, Lturno, Turno, TurnoDTS, Usuario } from 'src/app/Interfaces/
 import { DatosService } from 'src/app/Services/datos.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormularioConsultaComponent } from '../formulario-consulta/formulario-consulta.component';
+import { EnfermeriaComponent } from 'src/app/Pages/enfermeria/enfermeria.component';
 
 
 @Component({
@@ -70,7 +71,7 @@ export class ListconsultadoctorComponent implements OnInit {
   constructor(private datos:DatosService,private toastr: MatDialog,
     private cd: ChangeDetectorRef) {
      this.datos.usuario.subscribe(res => {
-       this.usuario = res;
+       this.usuario= res;
      });
    }
 
@@ -90,6 +91,7 @@ export class ListconsultadoctorComponent implements OnInit {
       }
     })
   }
+
   cambiacolor(){
     this.cd.detectChanges(); 
   console.log('entro')
@@ -115,6 +117,18 @@ export class ListconsultadoctorComponent implements OnInit {
                                     
      }
 
+  }
+  llamarenfermeria(lpturno:any){
+  this.consulta=JSON.parse(JSON.stringify(lpturno));  
+
+    console.log(this.consulta)
+    const dialogRef =  this.toastr.open(EnfermeriaComponent,{ width: '70%',
+    height: '70%',data:{consulta: this.consulta,graba:true}}  );
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed',result);           
+      
+    });
   }
   llamar2(L:TurnoDTS) {
     //cambia el estatus del turno a consulta

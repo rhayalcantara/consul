@@ -19,6 +19,7 @@ export class FormularioConsultaComponent implements OnInit {
   public actual:string ="active";
   public anteriores:string ="";
   public odontologia:string="";
+  public odontologiax:string="";
   public monto:number =0.00;
   public presu:Presu_Odon[]=[];
   public presu_ante:Presu_Odon[]=[];
@@ -223,18 +224,18 @@ export class FormularioConsultaComponent implements OnInit {
         newFormControl.setValue(this.data.consulta[control]);       
       }
       this.formGroup.addControl(control, newFormControl);
-      this.tool.GetProcedimientosCuenta().subscribe(rep=>{
-        this.tool.GetProcedimientos(0,rep,'',1008).subscribe({next:(result:ProcedimientoDTS[]) =>
-          {
-            this.procedimientosdts = result
-          },error:(err:Error) =>{
-            this.tool.showMessage("Error: " + err.message,"Error","error")
-        }})
-      })
-
     }    
-  
+    this.tool.GetProcedimientosCuenta().subscribe(rep=>{
+      this.tool.GetProcedimientos(0,rep,'',1008).subscribe({next:(result:ProcedimientoDTS[]) =>
+        {
+          this.procedimientosdts = result
+          console.log('procedimientos',this.procedimientosdts)
+        },error:(err:Error) =>{
+          this.tool.showMessage("Error: " + err.message,"Error","error")
+      }})
+    })
   }
+
 
   //  odontologia
   eliminar(p:Presu_Odon){
@@ -242,11 +243,12 @@ export class FormularioConsultaComponent implements OnInit {
     this.suma();
   }
   abrilformulario(){
+    let valor = this.procedimientosdts[0]
     let item:Presu_Odon={
       id:0,
       fecha:new Date(),
-      procedimiento:1,
-      valor:this.procedimientosdts.find(x=> x.id==1).monto,
+      procedimiento:valor.id,      
+      valor: valor.monto,
       consultaid:this.consulta.id
     }
     this.presu.push(item)
@@ -439,6 +441,7 @@ grabar(){
           this.actual="";
           this.anteriores=""
           this.odontologia="active"
+          this.odontologiax="active"
           break;        
     }
   }

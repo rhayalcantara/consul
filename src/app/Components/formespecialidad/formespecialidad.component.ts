@@ -51,8 +51,10 @@ export class FormespecialidadComponent implements OnInit {
         this.dialogRef.close(rep);
       });
     }
-    
+    this.dialogRef.close(this.especialidad);
   }
-cancelar(){}
+cancelar(){
+  this.dialogRef.close();
+}
 
 }

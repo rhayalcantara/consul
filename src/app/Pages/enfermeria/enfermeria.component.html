@@ -1,0 +1,118 @@
+<h1>Enfermeria</h1>
+<div  [formGroup]="formGroup">
+<div class="form-row">
+    <div class="form-group col-md-4">
+        <label for="record">Record #</label>
+        <input type="text" class="form-control" id="record"  formControlName="record" readonly/>
+    </div>
+    <div class="form-group col-md-4">
+        <label for="record">Fecha </label>
+        <input type="date" class="form-control" id="fecha"  formControlName="fecha" readonly/>
+    </div> 
+
+
+</div>
+
+
+    <div class="card-body style-default-bright" >
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label >Paciente</label>
+            </div> 
+            <div class="form-group col-md-4">
+              <a class="btn btn-primary" (click)="abribusquedapaciente()"> Buscar Paciente</a> 
+          </div>                                                    
+        </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label >Nombres</label>
+        <input type="text" class="form-control" id="nombres" formControlName="nombres" readonly/>
+      </div>
+      <div class="form-group col-md-4">
+        <label >Apellidos</label>
+        <input type="text" class="form-control" id="apellidos" formControlName="apellidos" readonly/>
+      </div>
+      <div class="form-group col-md-4"> 
+        <label >Numero Identificacion</label>
+        <input type="text" class="form-control" id="numero_identificacion" formControlName="numero_identificacion"  readonly />         
+      </div>              
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label >Sexo</label>
+        <input type="text" class="form-control" id="sexo" formControlName="sexo" readonly/>
+      </div>
+      <div class="form-group col-md-4">
+        <label >Nacionalidad</label>
+        <input type="text" class="form-control" id="nacionalidad" formControlName="nacionalidad" readonly/>
+      </div>             
+    </div>            
+    </div>
+</div>
+
+
+
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a (click)="abrilformulario() " class="nav-link active">  Agregar</a>
+    </li>
+  </ul>
+<table class='table table-striped' aria-labelledby="tableLabel" width=100%>
+    <thead>
+      <tr>
+        
+        <th width=10%>Fecha</th>
+        <th width=20%>Procedimiento</th>            
+        <th width=30%>Observacion</th>            
+        <th width=10%>Valor</th>
+        <th width=10%>Opciones</th> 
+      </tr>
+    </thead>
+  </table>
+  <div id="div1" >
+  <table class='table table-striped' aria-labelledby="tableLabel"  width=100%>      
+    <tbody>
+        <tr *ngFor="let pres of presu;let i = index" >
+
+            <td width=10% id="{{'fecha'+i}}"> 
+              <input type="date" class="form-control" id="fecha"  (change)="valueChange($event,'fecha',pres)" [value]="pres.fecha | date:'yyyy-MM-dd'" >  
+            </td>
+            <td width=20% id="{{'procedimiento'+i}}"> 
+                <!-- <input type="text" class="form-control"  id="procedimiento" (change)="valueChange($event,'procedimiento',pres)" [value]="pres.procedimiento " >   -->
+                <select class="form-control"  id="procedimiento"  (change)="valueChange($event,'procedimiento',pres)">
+                    <option *ngFor="let p of procedimientosdts" [value]="p.id"> {{p.descripcion}}-{{p.especialidad}} </option>          
+                </select>
+            </td>
+            <td width=30% id="{{'observacion'+i}}">
+              <textarea   class="form-control" aria-label="With textarea" id="observacion" (change)="valueChange($event,'observacion',pres)" [value]="pres.observacion"  ></textarea>  </td>            
+            <td width=20% id="{{'valor'+i}}"><input type="text" style="text-align:right;" class="form-control"  id="valor" (change)="valueChange($event,'valor',pres)" [value]="pres.valor | number:'1.2-2'"  aria-label="Readonly field">  </td>            
+            <td width=10% > <button class="btn btn" (click)="eliminar(pres)" >Eliminar</button> </td>
+
+        </tr>
+    </tbody>
+  </table>
+  </div>
+  <table class='table table-striped' aria-labelledby="tableLabel" width=100%>
+    <thead>
+      <tr>
+        
+        <th width=10%></th>
+        <th width=40%>Total</th>            
+        <th width=20%><input type="text" class="form-control" style="text-align:right;"  id="monto"  [value]="monto | number:'1.2-2'"  readonly></th>
+        <th width=10%></th> 
+      </tr>
+    </thead>
+  </table>  
+  <mat-dialog-actions *ngIf="graba==true">
+    <div class="card-actionbar style-default-bright">
+        <div class="card-actionbar-row">
+          <button class="mat-raised-button mat-primary" (click)="grabar()" [disabled]="!formGroup.valid">Grabar</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <a (click)="cancelar()" class="btn ink-reaction btn-raised btn-danger">Cancelar</a>
+        </div>
+      </div>
+    <!-- <button mat-button mat-dialog-close> grabar</button>
+    <button mat-button mat-dialog-close> cancelar</button> -->
+</mat-dialog-actions> 

@@ -45,9 +45,13 @@
       <td width=20%>{{ expediente.fecha }}</td>
       <td width=20%>{{ expediente.doctordts.persona.nombres}} {{ expediente.doctordts.persona.apellidos }} - {{ expediente.doctordts.especialidad.descripcion }} </td>
    
-      <td width=20%>
+      <td width=10%>
         <button class="btn btn-primary" (click)="abrirmodaledit(expediente);">Editar</button>
-      <!-- </td>
+       </td>
+       <td width=10%>
+        <button class="btn btn-secondary" (click)="abrirenfermeria(expediente);">Enfermeria</button>
+       </td>
+       <!--
       <td><button class="btn btn-danger" (click)=" delete(persona);">Eliminar</button></td> -->
 
     </tr>

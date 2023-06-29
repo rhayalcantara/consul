@@ -1,9 +1,15 @@
+import { resolve } from "@angular/compiler-cli/src/ngtsc/file_system";
 import { Injectable } from "@angular/core";
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
+import { ProcedimientoDTS } from "../Interfaces/interfaces";
+import { DatosService } from "../Services/datos.service";
 @Injectable()
 export default class Utils {
+    constructor(private tool:DatosService){
+
+    }
    static downloadAsPDF(pagos:any[],titulo:string) {
     
         let campos:string[]=[];
@@ -171,4 +177,7 @@ export default class Utils {
       public changeMessage(msg: string): void {
         this.message.next(msg);
       }
+   
+
+
 }

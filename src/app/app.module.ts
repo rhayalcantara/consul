@@ -85,6 +85,8 @@ import { ListAntecedentePersonalesComponent } from './Components/list-antecedent
 import { ProcedimientosComponent } from './Pages/procedimientos/procedimientos.component';
 import { FormprocedimientosComponent } from './Components/formprocedimientos/formprocedimientos.component';
 import { ListProcedimientosComponent } from './Components/list-procedimientos/list-procedimientos.component';
+import { EnfermeriaComponent } from './Pages/enfermeria/enfermeria.component';
+import { EnfermeriaPageComponent } from './Pages/enfermeria-page/enfermeria-page.component';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs; 
 
@@ -151,7 +153,9 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
     ListAntecedentePersonalesComponent,
     ProcedimientosComponent,
     FormprocedimientosComponent,
-    ListProcedimientosComponent
+    ListProcedimientosComponent,
+    EnfermeriaComponent,
+    EnfermeriaPageComponent
   ],
   entryComponents:[LoginComponent,FormularioConsultaComponent,
     BuscarpersonaComponent,FormpersonaComponent,

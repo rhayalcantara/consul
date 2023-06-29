@@ -40,7 +40,7 @@
               (newItemEvent_Paciente)="actualizapaciente($event)"
               (newItemEvent_Doctor)="actualizadoctor($event)"></app-docpac>
               
-        <div class="card-body style-default-bright" style="background-color: rgb(182, 207, 243);">
+        <div class="card-body style-default-bright" >
                 <label >Archivos Relacionados</label>
                 <app-listdoc [cod]="consulta.id" [identificador]="identificador"></app-listdoc>
         </div> 
@@ -48,14 +48,14 @@
   <div id="consulta" *ngIf="actual=='active'">
 
 
-    <div class="card-body style-default-bright" style="background-color: rgb(235, 250, 159);">
+    <div class="card-body style-default-bright" >
         <app-list-antecedente-personales
             [paciente]="paciente.paciente"
         ></app-list-antecedente-personales>
     </div>      
-    <div style="background-color: rgb(220, 245, 245);"  >         
+    <div  >         
                                 
-        <div class="card-body style-default-bright" style="background-color: rgb(242, 245, 227);">
+        <div class="card-body style-default-bright" >
 
             
                     <div class="form-row">
@@ -125,7 +125,8 @@
                             <input type="text" class="form-control" id="observacion"  formControlName="observacion" />         
                         </div>   -->
                         <div class="form-group col-sm-6"> 
-                            <label for="historialclinico">Historial Clinico</label>
+                            <label for="historialclinico" *ngIf="odontologiax!='active'">Historial Clinico</label>
+                            <label for="historialclinico" *ngIf="odontologiax=='active'">Cuestionario de Salud</label>
                             <textarea class="form-control" id="historialclinico" formControlName="historialclinico" aria-label="With textarea"></textarea>
                             <!-- <input type="text" class="form-control" id="historialclinico"  formControlName="historialclinico" />          -->
                         </div>  
@@ -154,17 +155,25 @@
                                                                                 
                         </div>               -->
                         <div class="form-group col-sm-6">
-                            <label for="revision_por_sistema">Revisión por Sistema</label>
+                            <label for="revision_por_sistema" *ngIf="odontologiax!='active'">Revisión por Sistema</label>
+                            <label for="revision_por_sistema" *ngIf="odontologiax=='active'">Alergias</label>
                             <textarea class="form-control" id="revision_por_sistema" formControlName="revision_por_sistema" aria-label="With textarea"></textarea>
                             <!-- <input type="text" class="form-control" id="revision_por_sistema"  formControlName="revision_por_sistema" /> -->
                     </div>                                              
                                                        
                     </div>
+                    <div  *ngIf="odontologiax=='active'">
+                        <div class="form-group col-md-6"> 
+                            <label for="examen_fisico">Alerta Medica</label>
+                            <textarea class="form-control" id="examen_fisico" formControlName="examen_fisico" aria-label="With textarea"></textarea>
+                        </div>  
+                    </div>
+                    <div *ngIf="odontologiax!='active'">
                     <div class="form-row"> 
                     <div class="form-group col-md-4"> 
                         <label for="examen_fisico">Examen Fisico</label>
                               
-                    </div>  
+                    </div >  
                     </div>
                     <div class="form-row"> 
                         <div class="form-group col-md-3"> 
@@ -238,14 +247,18 @@
                             <input type="text" class="form-control" id="otros"  formControlName="otros" />         
                         </div>                                                                                          
                     </div>    
+                   </div>
                     <div class="form-row"> 
                         <div class="form-group col-md-6"> 
-                            <label for="dx">dx</label>
+                            <label for="dx" *ngIf="odontologiax!='active'">dx</label>
+                            <label for="dx" *ngIf="odontologiax=='active'">Diagnostico</label>
                             <textarea class="form-control" id="dx" formControlName="dx" aria-label="With textarea"></textarea>
                             <!-- <input type="text" class="form-control" id="dx"  formControlName="dx" />          -->
                         </div>  
                         <div class="form-group col-md-6"> 
-                            <label for="tx">tx</label>
+                            
+                            <label for="tx" *ngIf="odontologiax!='active'">tx</label>
+                            <label for="tx" *ngIf="odontologiax=='active'">Tratamiento Realizado</label>
                             <textarea class="form-control" id="tx" formControlName="tx" aria-label="With textarea"></textarea>
                             <!-- <input type="text" class="form-control" id="tx"  formControlName="tx" />          -->
                         </div>                                                                                            

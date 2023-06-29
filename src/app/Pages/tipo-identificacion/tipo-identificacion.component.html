@@ -27,7 +27,7 @@
     <tr>
       <th>Descripcion</th>
       <th>Editar</th>
-      <th>Eliminar</th>
+      <!-- <th>Eliminar</th> -->
     </tr>
   </thead>
   <tbody>
@@ -37,7 +37,7 @@
 
         <button class="btn btn-primary" (click)="modal.open(content); edit(statu);">Editar</button>
       </td>
-      <td><button class="btn btn-danger" (click)=" delete(statu);">Eliminar</button></td>
+      <!-- <td><button class="btn btn-danger" (click)=" delete(statu);">Eliminar</button></td> -->
 
     </tr>
   </tbody>
@@ -62,11 +62,11 @@
           <input type="text" class="form-control" id="descripcion" required formControlName="descripcion" />
         </div>
         <div class="card-actionbar style-default-bright">
-          <div class="card-actionbar-row">
-            <button class="btn ink-reaction btn-raised btn-primary" type="submit" [disabled]="!formGroup.valid">Grabar</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <a (click)="modal.close();formClear();" class="btn ink-reaction btn-raised btn-danger">Cancelar</a>
+          <div class="d-grid gap-2 my-4">
+            <button class="btn btn-success " type="submit" [disabled]="!formGroup.valid"> Grabar</button>
+            <button class="btn btn-secondary" (click)="modal.close();formClear();"> Cancelar</button>
           </div>
+ 
         </div>
       </div>
     </form>

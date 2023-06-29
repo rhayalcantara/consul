@@ -11,6 +11,7 @@ import { ListrolesComponent } from './Components/listroles/listroles.component';
 import { ListusersComponent } from './Components/listusers/listusers.component';
 import { ConsultoriosComponent } from './Pages/consultorios/consultorios.component';
 import { DoctoresComponent } from './Pages/doctores/doctores.component';
+import { EnfermeriaComponent } from './Pages/enfermeria/enfermeria.component';
 import { EspedienteComponent } from './Pages/espediente/espediente.component';
 import { ExpecialidadesComponent } from './Pages/expecialidades/expecialidades.component';
 import { HomeComponent } from './Pages/home/home.component';
@@ -23,6 +24,7 @@ import { StatusComponent } from './Pages/status/status.component';
 import { TandaComponent } from './Pages/tanda/tanda.component';
 import { TipoIdentificacionComponent } from './Pages/tipo-identificacion/tipo-identificacion.component';
 import { AuthGuard } from './security/auth.guard';
+import { EnfermeriaPageComponent } from './Pages/enfermeria-page/enfermeria-page.component';
 
 const routes: Routes = [ 
   { path: '', component: InicioComponent,pathMatch: 'full' },
@@ -46,7 +48,9 @@ const routes: Routes = [
   { path: 'Users', component: ListusersComponent, canActivate: [AuthGuard] },
   { path: 'Home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'Lturnos', component: LTurnosComponent, canActivate: [AuthGuard]},
-  { path: 'proced', component:ListProcedimientosComponent, canActivate: [AuthGuard]}
+  { path: 'proced', component:ListProcedimientosComponent, canActivate: [AuthGuard]},
+  { path: 'enfermeria', component:EnfermeriaPageComponent, canActivate: [AuthGuard] }
+  
   
 ];
 

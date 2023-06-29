@@ -9,6 +9,7 @@ import Utils from 'src/app/helpers/help';
 import { FormBuscarFechaComponent } from 'src/app/Components/form-buscar-fecha/form-buscar-fecha.component';
 import { VisorpdfComponent } from 'src/app/Components/visorpdf/visorpdf.component';
 import { LoadingComponent } from 'src/app/Components/loading/loading.component';
+import { EnfermeriaComponent } from '../enfermeria/enfermeria.component';
 
 
 @Component({
@@ -263,6 +264,22 @@ export class EspedienteComponent implements OnInit {
 
     
     const dialogRef =  this.toastr.open(FormularioConsultaComponent,{ width: '70%',
+    height: '70%',data:{consulta: this.consulta,graba:true}}  );
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed',result);           
+      if (this.buscando){
+        this.updatedatosfiltro(this.page,this.textobuscar);
+      }else{
+        this.updatedatos(this.page);
+      }
+  });
+  }
+  abrirenfermeria(expe: Consultasdts){
+    this.consulta=JSON.parse(JSON.stringify(expe));  
+
+    
+    const dialogRef =  this.toastr.open(EnfermeriaComponent,{ width: '70%',
     height: '70%',data:{consulta: this.consulta,graba:true}}  );
     
     dialogRef.afterClosed().subscribe(result => {

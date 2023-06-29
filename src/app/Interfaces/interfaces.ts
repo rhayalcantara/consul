@@ -386,6 +386,14 @@ export interface Presu_Odon{
   valor:number;
   consultaid:number;
 }
+export interface Presu_Enf{
+  id:number;
+  fecha: Date;
+  procedimiento:number;
+  valor:number;
+  consultaid:number;
+  observacion: string;
+}
 export interface po extends Presu_Odon{
   editando:boolean;
   editado:boolean;

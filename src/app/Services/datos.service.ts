@@ -7,7 +7,7 @@ import { AgendaConsultorio, AgendaConsultoriodetalle, AgendaConsultoriodts,
          PacientePersonaSexo, 
          PacientePersonaSexoTipoidentificacion, 
          PacienteSexoChart, 
-         Parentesco, Persona, Personaparentesco, Personaparentescodts, Persona_cf, Presu_Odon, Procedimiento, ProcedimientoDTS, Response, Roles, 
+         Parentesco, Persona, Personaparentesco, Personaparentescodts, Persona_cf, Presu_Enf, Presu_Odon, Procedimiento, ProcedimientoDTS, Response, Roles, 
          RolesMenu, Status, Tanda, Turno, TurnoDTS, User, UserDTS, Usuario } from '../Interfaces/interfaces';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2'
@@ -20,18 +20,18 @@ export class DatosService {
 
 
  
- // public Url:       string = "http://rhayalcantara-001-site2.ftempurl.com/api/";
-  //public url_root:  string = "http://192.168.0.10:9095/";
-//  public url_root:  string = "https://localhost:5001/"
- public url_root:string = "http://rhayalcantara-001-site2.ftempurl.com/"
-  public url_rootx:string = "http://rhayalcantara-001-site3.ftempurl.com/"
-   public Url: string = this.url_root+"api/";
+     public Url:       string = "http://rhayalcantara-001-site2.ftempurl.com/api/";
+    //public url_root:  string = "http://192.168.0.10:9095/";
+   // public url_root:  string = "https://localhost:5001/"
+   public url_root:string = "http://rhayalcantara-001-site2.ftempurl.com/"
+   // public url_rootx:string = "https://localhost:5001/"
+   //public Url: string = this.url_root+"api/";
   
     public get urlserver(): string {
       return this.url_root;
     } 
     public get urlserverx(): string {
-      return this.url_rootx;
+      return this.url_root;
     } 
     
     public get Url_api():string{
@@ -683,6 +683,7 @@ public Deleteespecialidad(obj: Especialidades): Observable<Especialidades> {
     });
     return this.http.post<Presu_Odon[]>(this.Url +'Presu_Odon/lote', JSON.stringify(preOdon), { headers })
   }
+  
   public GetPreodonConsulta(id:string): Observable<Presu_Odon[]>{
     console.log(this.Url +`Presu_Odon/consutaid?id=${id}`)
     return this.http.get<Presu_Odon[]>(this.Url +`Presu_Odon/consultaid?id=${id}`);
@@ -691,6 +692,22 @@ public Deleteespecialidad(obj: Especialidades): Observable<Especialidades> {
     return this.http.delete<Presu_Odon>(this.Url +`Presu_Odon/${preOdon.id}`)
      
   }
+  public setPreEnf(preOdon:Presu_Odon[]): Observable<Presu_Enf[]>{
+    var headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8'
+    });
+    return this.http.post<Presu_Enf[]>(this.Url +'Presu_Enf/lote', JSON.stringify(preOdon), { headers })
+  }
+  
+  public GetPreEnfConsulta(id:string): Observable<Presu_Enf[]>{
+    
+    return this.http.get<Presu_Enf[]>(this.Url +`Presu_Enf/consultaid?id=${id}`);
+  }
+  public delPreEnfConsulta(preOdon:Presu_Odon): Observable<Presu_Enf>{
+    return this.http.delete<Presu_Enf>(this.Url +`Presu_Enf/${preOdon.id}`)
+     
+  }
+
   public getestaditicacsd(ano:string): Observable<ConsultaDocSemanal[]>{
   
     return this.http.get<ConsultaDocSemanal[]>(this.Url +`Estadisticas/csd/${ano}`)

@@ -18,10 +18,15 @@
         <th>Record</th>
         <th>Paciente</th>
         <th>Doctor</th>
+        <div *ngIf="usuario.doctor.especialiadid!=1013">
         <th>Tanda</th>
         <th>Numero</th>
         <th>Status</th>
         <th>Valor</th>
+        </div>
+        <div *ngIf="usuario.doctor.especialiadid==1013">
+          <th>Numero</th>
+          </div>        
         <th>Opciones</th>
         
       </tr>
@@ -31,13 +36,26 @@
         <td >{{lpturno.record }}</td>
         <td >{{lpturno.paciente }}</td>
         <td>{{lpturno.doctor}}</td>
+        <div *ngIf="usuario.doctor.especialiadid!=1013">        
         <td>{{lpturno.tanddescripcion}}</td> 
         <td>{{lpturno.numero}}</td> 
         <td >{{lpturno.statusdescripcion}}</td>
         <td>{{lpturno.valor}}</td>  
+        </div>
+        <div *ngIf="usuario.doctor.especialiadid==1013">        
+
+          <td>{{lpturno.numero}}</td> 
+ 
+          </div>
          <td >
+          <div *ngIf="usuario.doctor.especialiadid!=1013">
           <button  class="btn btn-secondary" (click)="llamar2(lpturno);" *ngIf="lpturno.status==16">LLamar a Consultorio</button>
           <button  class="btn btn-secondary" (click)="llamar(lpturno);" *ngIf="lpturno.status==14 || lpturno.status==1016 ">Consultar</button>
+        </div>
+        <div *ngIf="usuario.doctor.especialiadid==1013">
+          <button  class="btn btn-secondary" (click)="llamarenfermeria(lpturno);" >Enfermeria</button>
+         
+        </div>        
       </td>
       </tr>
     </tbody>
