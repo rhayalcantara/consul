@@ -3,7 +3,19 @@ a.navbar-brand {
     text-align: center;
     word-break: break-all;
   }
-
+  .logo-div {
+    
+    border-radius: 113px;
+    background: url("../../assets/logoazul.jpg");
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    box-shadow:  20px 20px 40px #b6b3b3,
+    -20px -20px 40px #ffffff;
+    width: 170px;
+    height: 170px;
+    margin: 0 auto;
+    }
   html {
     font-size: 14px;
   }
