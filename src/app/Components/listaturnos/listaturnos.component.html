@@ -13,7 +13,7 @@
 
   
   <p *ngIf="!lturnos"><em>Cargando...</em></p>
-  
+  <div class="card">
   <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="lturnos">
     <thead>
       <tr>
@@ -38,6 +38,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
  <!-- <pagination-controls [maxSize]="maxSize"
                       [directionLinks]="directionLinks"
                       [autoHide]="autoHide"

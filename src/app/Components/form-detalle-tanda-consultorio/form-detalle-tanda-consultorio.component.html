@@ -18,13 +18,18 @@
     </div>
    <br>
    
-<div class="card-actionbar-row">
+<!-- <div class="card-actionbar-row">
     <button class="btn ink-reaction btn-raised btn-primary" type="submit" style="float:right;"
       [disabled]="!formGroup.valid">Grabar</button>
     &nbsp;&nbsp;&nbsp;&nbsp;
     <a mat-dialog-close style="float: right; margin-right: 5px;" (click)="cancelar()" class="btn ink-reaction btn-raised btn-danger">Cancelar</a>
+  </div> -->
+  <div class="text-center pt-1 mb-5 pb-1">
+    <div class="d-grid gap-2">
+     <button class="btn btn-success btn-block mb-3" [disabled]="!formGroup.valid" type="submit"> Grabar</button>
+     <button class="btn btn-secondary btn-block" type="button" (click)="cancelar()"  >Cancelar</button>
+    </div>
   </div>
-
 </form>
 </div>
 <mat-dialog-actions>

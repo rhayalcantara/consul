@@ -69,7 +69,7 @@ export class FormAgendaConsultorioComponent implements OnInit {
     //     doctor:+this.agendaconsultorio.doctor
     //   }
       this.agendaconsultorio=JSON.parse(JSON.stringify(this.formGroup.value));
-
+console.log("entro")
     if (this.agendaconsultorio.id==0){
       //agregar
        

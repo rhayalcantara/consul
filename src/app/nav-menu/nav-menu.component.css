@@ -6,10 +6,11 @@ a.navbar-brand {
   .logo-div {
     
     border-radius: 113px;
-    background: url("../../assets/logoazul.jpg");
+    background: url("../../assets/logo.jpg");
     background-repeat: no-repeat;
     background-size: 100px;
-    background-position: center;
+    background-color: white;
+    background-position: center ;
     box-shadow:  20px 20px 40px #b6b3b3,
     -20px -20px 40px #ffffff;
     width: 170px;
@@ -31,11 +32,11 @@ a.navbar-brand {
   
   mat-sidenav-container{
     height: 100%;
-    
+    background-color: rgb(218, 211, 211);
 }
   mat-toolbar {
     background: #004a9f;
-    color: white;
+    color: rgb(221, 214, 214);
   }
   img{
        width: 140px;
@@ -61,8 +62,8 @@ a.navbar-brand {
       align-items: center;
       width:100xp;
       font-size: 2rem;
-      color:lightgray;
-     
+      color:rgb(236, 229, 229);
+      background-color:rgb(143, 27, 27);
       border-radius:10px;
   }
  

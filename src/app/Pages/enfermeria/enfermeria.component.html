@@ -108,9 +108,18 @@
   <mat-dialog-actions *ngIf="graba==true">
     <div class="card-actionbar style-default-bright">
         <div class="card-actionbar-row">
-          <button class="mat-raised-button mat-primary" (click)="grabar()" [disabled]="!formGroup.valid">Grabar</button>
+          <!-- <button class="mat-raised-button mat-primary" (click)="grabar()" [disabled]="!formGroup.valid">Grabar</button>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <a (click)="cancelar()" class="btn ink-reaction btn-raised btn-danger">Cancelar</a>
+          <a (click)="cancelar()" class="btn ink-reaction btn-raised btn-danger">Cancelar</a> -->
+
+          <div class="text-center pt-1 mb-5 pb-1">
+            <div class="d-grid gap-2">
+             <button class="btn btn-success btn-block mb-3" [disabled]="!formGroup.valid" (click)="grabar()"> Grabar</button>
+             <button class="btn btn-secondary btn-block" type="button" (click)="cancelar()"  >Cancelar</button>
+            </div>
+          </div>
+
+
         </div>
       </div>
     <!-- <button mat-button mat-dialog-close> grabar</button>

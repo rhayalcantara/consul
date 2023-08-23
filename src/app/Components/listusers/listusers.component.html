@@ -19,26 +19,28 @@
   
   <p *ngIf="!Users"><em>No Hay Usuarios...</em></p>
   
-  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="Users">
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="Users" width=100%>
     <thead>
       <tr>
-        <th>Usuario</th>
-        <th>Rol</th>
-        <th>Nombre</th>
-        <th>Correo</th>
-        <th>Telefono</th>
-        <!-- <th>Status</th> -->
-        <th>Opcion</th>
+        <th width=10%>Usuario  </th>
+        <th width=10%>Rol      </th>
+        <th width=40%>Nombre   </th>
+        <th width=15%>Correo   </th>
+        <th width=10%>Telefono </th>        
+        <th width=10%>Opcion   </th>
       </tr>
     </thead>
+  </table>
+    <div id="div1">
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="Users" width=100%>
     <tbody>
       <tr *ngFor="let user of Users | filter: term   ">
-        <td>{{ user.user }}</td>
-        <td>{{ user.rol }}</td>
-        <td>{{ user.persona }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.status }}</td>
-        <td>
+        <td width=10%>{{ user.user }}</td>
+        <td width=10%>{{ user.rol }}</td>
+        <td width=40%>{{ user.persona }}</td>
+        <td width=15%>{{ user.email }}</td>
+        <td width=10%>{{ user.status }}</td>
+        <td width=10%>
             <button class="btn btn-primary" (click)="abrirmodaledit(user);">Editar</button>
         </td>
          <!-- <td><button class="btn btn-danger" (click)=" cambiarclave(user);">Cambiar Clave</button></td>             -->
@@ -46,7 +48,8 @@
       </tr>
     </tbody>
   </table>
-  
+    </div>
+ 
 
  
    <!-- <pagination-controls [maxSize]="maxSize"

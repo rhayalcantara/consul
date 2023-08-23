@@ -22,7 +22,7 @@
 
 
 <p *ngIf="!consultas"><em>Cargando...</em></p>
-
+<div class="card">
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="consultas" width=100%>
   <thead>
     <tr>
@@ -57,6 +57,7 @@
     </tr>
   </tbody>
 </table>
+</div>
 </div>
 <mat-paginator 
   #paginator [length]="totalSize"

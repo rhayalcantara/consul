@@ -1,7 +1,10 @@
 <!-- card informativas -->
 <div class="row">
 
-    
+  <div class="logo-div">
+  </div>
+</div>
+<div class="row">
       <app-card class="col-sm-4 my-3" [ct]= "ctTotalPaciente"></app-card>
       <app-card class="col-sm-4 my-3" [ct] = "ctTotalPacienteF"></app-card>
       <app-card class="col-sm-4 my-3" [ct] = "ctTotalPacienteM"></app-card>
@@ -11,86 +14,125 @@
 
 <div class="row">
   <div class="col-sm-4 col-md-6 col-xl-6">
-    <label>Estadistica Pacientes Nuevos por Sexo</label>
-      <button class="m-3"  mat-raised-button color="accent"  (click)="imprimeps()"  >
-          <span class="material-icons">print</span> Imprimir
-      </button>
+
+    <div class="card " >
+      <div class="card-body">
+        <div class="card-title d-flex align-items-start justify-content-between">
+          <div class="avatar flex-shrink-0">
+            <label>Estadistica Pacientes Nuevos por Sexo</label>
+            <button class="m-3 bnt"  mat-raised-button color="accent"  (click)="imprimeps()"  >
+              <span class="material-icons">print</span> Imprimir
+          </button>
+          </div>
+        </div>
+
+      <app-chart *ngIf="datapacientessexo.length>0"
+        [lineChartData]="ChartData"
+        [lineChartLabels]="ChartLabels"
+        [color]="color"
+        titulo="Pacientes Sexo"
+        lineChartType="line"                  
+        ></app-chart>        
+      </div>
+    </div>        
   
-                <app-chart *ngIf="datapacientessexo.length>0"
-                  [lineChartData]="ChartData"
-                  [lineChartLabels]="ChartLabels"
-                  [color]="color"
-                  titulo="Pacientes Sexo"
-                  lineChartType="line"
-                  
-                  ></app-chart>  
-                </div>
-                  <div class="col-sm-4 col-md-6 col-xl-6">
-                    <label >Estadistica Consulta Pacientes por Semana </label>
-                      <div >
-                        
+
+      </div>
+
+
+
+
+
+                <div class="col-sm-4 col-md-6 col-xl-6" >
+                <div class="card " >
+                  <div class="card-body">
+            
+                    <div class="card-title d-flex align-items-start justify-content-between">            
+                      <div class="avatar flex-shrink-0">
+                        <div class="row">
+                        <label >Estadistica Consulta Pacientes por Semana </label>
+                      </div>
+                      <div class="row">
                         <Label > Selecione el Año </Label>
                         <select name="ano" id="ano" (change)="actano($event)">  
                           <option *ngFor="let p of anos" [value]="p.ano">{{p.ano}}</option>
                         </select>
-                        <button mat-raised-button color="accent" style="float: right;" (click)="imprime()"  >
+                        <button mat-raised-button color="accent" class="bnt" (click)="imprime()"  >
                           <span class="material-icons">print</span> Imprimir
-                        </button>
-                      </div>
-                    
-                    
-                      <div >
-                   
-                        <div id="div1">
+                        </button>      
+                      </div>                  
+                        <div class="row">
 
-                          <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="ppst" >
-                            <thead>
-                            <th class="centrado">Doctor</th>                
-                            <th class="centrado">Especialidad</th>
-                            <th class="centrado"># Consulta Semana</th>   
-                            </thead>
-                          <tbody>
+                          <div class="col-sm-4 col-md-6 col-xl-12">
+                   
+                            <div id="div1">
+    
+                              <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="ppst" >
+                                <thead>
+                                <th class="centrado">Doctor</th>                
+                                <th class="centrado">Especialidad</th>
+                                <th class="centrado"># Consulta Semana</th>   
+                                </thead>
+                              <tbody>
+                                
+                                <tr *ngFor="let p of array  ">
+                                  <td class="centrado">{{ p.doc }}</td>
+                                  <td class="centrado">{{ p.descripcion }}</td>
+                                  <td class="centrado">{{ p.promediosemanal }}</td> 
+                                </tr>
+                              
+                              </tbody>
+                            </table>
+                          </div>
                             
-                            <tr *ngFor="let p of array  ">
-                              <td class="centrado">{{ p.doc }}</td>
-                              <td class="centrado">{{ p.descripcion }}</td>
-                              <td class="centrado">{{ p.promediosemanal }}</td> 
-                            </tr>
-                          
-                          </tbody>
-                        </table>
+                          </div>                          
+                        </div>
                       </div>
-                        
-                      </div>
-                    
+                    </div>
+                 
+                  </div>
+                </div>
+                                    
                   </div>                  
                                               
 </div>
 
 
-    <label>Estadistica Pacientes Por Identificacion y Sexo</label>
-    <button mat-raised-button color="accent" style="float: right;" (click)="imprimepsi()"  >
-      <span class="material-icons">print</span> Imprimir
-    </button>
+<div class="card " style="margin-top: 30px;">
+  <div class="card-body">
+    <div class="card-title d-flex align-items-start justify-content-between">
+      <div class="avatar flex-shrink-0">
+        <label>Estadistica Pacientes Por Identificacion y Sexo</label>
+        <button mat-raised-button color="accent" class="bnt" (click)="imprimepsi()"  >
+          <span class="material-icons">print</span> Imprimir
+        </button>
+      </div>
+    </div>
 
-
-  <div id="div1">
-    <table class='table table-striped ' aria-labelledby="tableLabel" *ngIf="ppst" >   
-      <thead>
-        <tr>
-          <th class="centrado">Tipo Identificacion</th>
-          <th class="centrado">Sexo</th>
-          <th class="centrado">Cantidad</th>
-          <th class="centrado">Porciento</th>
+    <div id="div1">
+      <table class='table table-striped ' aria-labelledby="tableLabel" *ngIf="ppst" >   
+        <thead>
+          <tr>
+            <th class="centrado">Tipo Identificacion</th>
+            <th class="centrado">Sexo</th>
+            <th class="centrado">Cantidad</th>
+            <th class="centrado">Porciento</th>
+          </tr>
+        </thead>
+      <tbody>
+        <tr *ngFor="let p of ppst  ">
+          <td class="centrado">{{ p.tipoidentificacion }}</td>
+          <td class="centrado">{{ p.sexo }}</td>
+          <td class="centrado">{{ p.cnt }}</td>
+          <td class="centrado">{{ p.porciento }}</td>        
         </tr>
-      </thead>
-    <tbody>
-      <tr *ngFor="let p of ppst  ">
-        <td class="centrado">{{ p.tipoidentificacion }}</td>
-        <td class="centrado">{{ p.sexo }}</td>
-        <td class="centrado">{{ p.cnt }}</td>
-        <td class="centrado">{{ p.porciento }}</td>        
-      </tr>
-    </tbody>
-  </table>
-  </div>
+      </tbody>
+    </table>
+    </div>
+</div> 
+
+
+
+
+
+  

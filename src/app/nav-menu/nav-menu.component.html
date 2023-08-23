@@ -6,8 +6,8 @@
       <mat-icon *ngIf="!sidenav.opened"> menu</mat-icon>
       <mat-icon *ngIf="sidenav.opened"> close</mat-icon>
     </button>
-    <div class="logo-div">
-    </div>
+    <!-- <div class="logo-div">
+    </div> -->
     <!-- <img class="img" src="./assets/logo azul.jpg" /> -->
       
 
@@ -24,7 +24,9 @@
   
     <mat-sidenav fullscreen #sidenav="matSidenav" >
     
-      <img class="avatar mat-elevation-z8" src="./assets/logo.jpg" />
+      <!-- <img class="avatar mat-elevation-z8" src="./assets/logo.jpg" /> -->
+      <div class="logo-div">
+      </div>
       <h4 class="name">{{userdts.persona}}</h4>
       <p class="designation">{{userdts.rol}}</p>
   

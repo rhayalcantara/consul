@@ -1,14 +1,15 @@
 <div class="row">
-<div class="col">
-    <h2>{{accion}} un {{rol}}</h2>
-</div>
-<div class="col">
-   <button class="btn btn-primary" style="float: right;" *ngIf="rol!='Persona'" (click)="buscaexistente()">Buscar Persona Existente</button>
-</div>
+  <div class="col">
+      <h2>{{accion}} un {{rol}}</h2>
+  </div>
+  <div class="col">
+    <button class="btn btn-primary" style="float: right;" *ngIf="rol!='Persona'" (click)="buscaexistente()">Buscar Persona Existente</button>
+  </div>
 </div>
 <div >
   <form novalidate (ngSubmit)=" grabar();" [formGroup]="formGroup">
-    <!-- <div class="card card-bordered style-primary"> -->
+    <div class="card card-bordered style-primary"> 
+
       <div class="card-head">
         <header></header>
       </div>
@@ -98,7 +99,7 @@
         </div>
       </div>
       
-      <app-formpersonaparentesco (paciente)='persona' *ngIf="rol=='Paciente'  && paciente.id!=0 "></app-formpersonaparentesco>
+      <!-- <app-formpersonaparentesco (paciente)='persona' *ngIf="rol=='Paciente'  && paciente.id!=0 "></app-formpersonaparentesco> -->
       <div class="form-group" *ngIf="rol=='Pariente'">
         <label for="parentescoid">Parentesco </label>
         <select class="form-control" formControlName="parentescoid" id="parentescoid">
@@ -113,14 +114,22 @@
       </div>
       <!-- <div class="card-actionbar style-default-bright"> -->
         <div class="card-actionbar-row">
-          <button class="btn ink-reaction btn-raised btn-primary" type="submit" style="float:right;"
+          <!-- <button class="btn ink-reaction btn-raised btn-primary" type="submit" style="float:right;"
             [disabled]="!formGroup.valid">Grabar</button>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <a mat-dialog-close style="float: right; margin-right: 5px;" (click)="cancelar()" class="btn ink-reaction btn-raised btn-danger">Cancelar</a>
+          <a mat-dialog-close style="float: right; margin-right: 5px;" (click)="cancelar()" class="btn ink-reaction btn-raised btn-danger">Cancelar</a> -->
+
+          <div class="text-center pt-1 mb-5 pb-1">
+            <div class="d-grid gap-2">
+             <button class="btn btn-success btn-block mb-3" [disabled]="!formGroup.valid"  type="submit"> Grabar</button>
+             <button class="btn btn-secondary btn-block" type="button" (click)="cancelar()"  >Cancelar</button>
+            </div>
+        </div>
+
         </div>
         <br/>
       <!-- </div> -->
-    <!-- </div> -->
+    </div> 
   </form>
 </div>
 <mat-dialog-actions>
